@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/freedomvr-gear.iml" filepath="$PROJECT_DIR$/freedomvr-gear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vRLib/vRLib.iml" filepath="$PROJECT_DIR$/vRLib/vRLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrScene/vrScene.iml" filepath="$PROJECT_DIR$/vrScene/vrScene.iml" />
+    </modules>
+  </component>
+</project>
