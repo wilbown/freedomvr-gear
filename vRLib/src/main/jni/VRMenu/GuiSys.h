@@ -44,7 +44,7 @@ public:
 	// the event.
 	virtual bool		OnKeyEvent( App * app, int const keyCode, KeyState::eKeyEventType const eventType ) = 0;
 	// called when re-orient is done from Universal Menu or mount on 
-	virtual void		ResetMenuOrientations( App * app ) = 0;
+	virtual void		ResetMenuOrientations( App * app, Matrix4f const & viewMatrix ) = 0;
 
     // Add a new menu that can be opened to receive events
     virtual void        AddMenu( VRMenu * menu ) = 0;

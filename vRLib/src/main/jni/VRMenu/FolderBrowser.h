@@ -64,7 +64,7 @@ public:
 	static char const *			MENU_NAME;
     static  VRMenuId_t			ID_CENTER_ROOT;
 
-	virtual void						OneTimeInit( const OvrMetaData & metaData );
+	virtual void						OneTimeInit();
     // Builds the menu view using the passed in model. Builds only what's marked dirty - can be called multiple times.
 	virtual void						BuildDirtyMenu( OvrMetaData & metaData );
 	// Swiping when the menu is inactive can cycle through files in
@@ -146,8 +146,11 @@ protected:
 	//================================================================================
 	// Subclass protected interface
 
-	// Called when building a panel
-	virtual const char *		GetPanelTitle( const OvrMetaDatum & panelData ) = 0;
+	// Called from the base class when building a cateory.
+	virtual String				GetCategoryTitle( char const * key, char const * defaultStr ) const = 0;
+
+	// Called from the base class when building a panel
+	virtual String				GetPanelTitle( const OvrMetaDatum & panelData ) const = 0;
 
 	// Called when a panel is activated
 	virtual void				OnPanelActivated( const OvrMetaDatum * panelData ) = 0;
@@ -160,6 +163,9 @@ protected:
 	// Called on a background thread to load thumbnail
 	virtual	unsigned char *		LoadThumbnail( const char * filename, int & width, int & height ) = 0;
 
+	// Returns the proper thumbnail URL
+	virtual String				ThumbUrl( const OvrMetaDatum * item ) { return item->Url; }
+
 	// Adds thumbnail extension to a file to find/create its thumbnail
 	virtual String				ThumbName( const String & s ) = 0;
 
@@ -169,7 +175,13 @@ protected:
 	// Optional interface
 	//
 	// Request external thumbnail - called on main thread
-	virtual unsigned char *		RetrieveRemoteThumbnail( const char * url, const char * cacheDestinationFile, int & outWidth, int & outHeight ) { return NULL; }
+	virtual unsigned char *		RetrieveRemoteThumbnail(
+			const char * url,
+			const char * cacheDestinationFile,
+			int folderId,
+			int panelId,
+			int & outWidth,
+			int & outHeight ) { return NULL; }
 
 	// If we fail to load one type of thumbnail, try an alternative
 	virtual String				AlternateThumbName( const String & s ) { return String(); }
@@ -189,6 +201,7 @@ protected:
 
 protected:
 	App *						AppPtr;
+	int							MediaCount; // Used to determine if no media was loaded
 
 private:
 	static void *		ThumbnailThread( void * v );
@@ -267,9 +280,8 @@ private:
 	Vector3f 								TouchDownPosistion; // First event in touch relative is considered as touch down position
 	eScrollDirectionLockType				TouchDirectionLocked;
 
-	int										MediaCount; // Used to determine if no media was loaded
 };
 
 } // namespace OVR
 
-#endif // OVR_GlobalMenu_h
+#endif // OVR_FolderBrowser_h

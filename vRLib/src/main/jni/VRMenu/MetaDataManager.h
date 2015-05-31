@@ -106,6 +106,9 @@ protected:
 	// Optional protected interface
 	virtual bool			IsRemote( const OvrMetaDatum * datum ) const	{	return true; } 
 
+	// Removes duplicate entries from newData
+    virtual void            DedupMetaData( const Array< OvrMetaDatum * > & existingData, StringHash< OvrMetaDatum * > & newData );
+
 private:
 	Category * 				GetCategory( const String & categoryName );
 	void					ProcessMetaData( JSON * dataFile, const Array< String > & searchPaths, const char * metaFile );

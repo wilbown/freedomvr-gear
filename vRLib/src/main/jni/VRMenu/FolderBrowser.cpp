@@ -631,7 +631,7 @@ public:
 
 	float GetAccumulatedRotation() const { return ScrollMgr.GetPosition();  }
 
-	int CurrentPanelIndex() const { return static_cast< int >( ScrollMgr.GetPosition() ); }
+	int CurrentPanelIndex() const { return nearbyintf( ScrollMgr.GetPosition() ); }
 
 private:
     virtual eMsgStatus Frame( App * app, VrFrame const & vrFrame, OvrVRMenuMgr & menuMgr, VRMenuObject * self, VRMenuEvent const & event )
@@ -757,7 +757,7 @@ private:
 		// show or hide panels based on current position
 		//
 		// for rendering, we want the switch to occur between panels - hence nearbyint
-		const int curPanelIndex = nearbyintf( ScrollMgr.GetPosition() );
+		const int curPanelIndex = CurrentPanelIndex();
 		const int extraPanels = FolderBrowser.GetNumSwipePanels() / 2;
 		for ( int i = 0; i < numPanels; ++i )
 		{
@@ -850,6 +850,7 @@ OvrFolderBrowser::OvrFolderBrowser(
 		unsigned thumbHeight )
 	: VRMenu( MENU_NAME )
 	, AppPtr( app )
+	, MediaCount( 0 )
 	, ThumbnailThreadId( -1 )
 	, PanelWidth( 0.0f )
 	, PanelHeight( 0.0f )
@@ -868,7 +869,6 @@ OvrFolderBrowser::OvrFolderBrowser(
 	, LastControllerInputTimeStamp( 0.0f )
 	, IsTouchDownPosistionTracked( false )
 	, TouchDirectionLocked( NO_LOCK )
-	, MediaCount( 0 )
 {
 	DefaultPanelTextureIds[ 0 ] = 0;
 	DefaultPanelTextureIds[ 1 ] = 0;
@@ -1064,7 +1064,7 @@ void OvrFolderBrowser::Open_Impl( App * app, OvrGazeCursor & gazeCursor )
 	OnBrowserOpen();
 }
 
-void OvrFolderBrowser::OneTimeInit( const OvrMetaData & metaData )
+void OvrFolderBrowser::OneTimeInit()
 {
 	const OvrStoragePaths & storagePaths = AppPtr->GetStoragePaths();
 	storagePaths.GetPathIfValidPermission( EST_PRIMARY_EXTERNAL_STORAGE, EFT_CACHE, "", W_OK, AppCachePath );
@@ -1187,8 +1187,11 @@ void OvrFolderBrowser::BuildDirtyMenu( OvrMetaData & metaData )
 				String localizedCategoryName;
 
 				// Get localized tag (folder title)
-				VrLocale::GetString( AppPtr->GetVrJni(), AppPtr->GetJavaObject(), 
-					VrLocale::MakeStringIdFromANSI( currentCategory.CategoryTag ), currentCategory.CategoryTag, localizedCategoryName );
+				localizedCategoryName = GetCategoryTitle( VrLocale::MakeStringIdFromANSI( currentCategory.CategoryTag ), currentCategory.CategoryTag );
+				
+				// the localization is now done app-side
+//				VrLocale::GetString( AppPtr->GetVrJni(), AppPtr->GetJavaObject(), 
+//					VrLocale::MakeStringIdFromANSI( currentCategory.CategoryTag ), currentCategory.CategoryTag, localizedCategoryName );
 
 				folder = new FolderView( localizedCategoryName, currentCategory.CategoryTag );
 				Folders.PushBack( folder );
@@ -1738,7 +1741,13 @@ void * OvrFolderBrowser::ThumbnailThread( void * v )
 
 			int		width;
 			int		height;
-			unsigned char * data = folderBrowser->RetrieveRemoteThumbnail( panoUrl, cacheDestination, width, height );
+			unsigned char * data = folderBrowser->RetrieveRemoteThumbnail(
+					panoUrl,
+					cacheDestination,
+					folderId,
+					panelId,
+					width,
+					height );
 
 			if ( data != NULL )
 			{
@@ -1936,9 +1945,9 @@ void OvrFolderBrowser::AddPanelToFolder( const OvrMetaDatum * panoData, const in
 	panel.Size.x = PanelWidth;
 	panel.Size.y = PanelHeight;
 
-	String panelTitle;
-	const char * panoTitle = GetPanelTitle( *panoData );
-	VrLocale::GetString(  AppPtr->GetVrJni(), AppPtr->GetJavaObject(), panoTitle, panoTitle, panelTitle );
+	String panelTitle = GetPanelTitle( *panoData );
+	// This is now done at the application left so that an app can localize any way it wishes
+	//VrLocale::GetString(  AppPtr->GetVrJni(), AppPtr->GetJavaObject(), panoTitle, panoTitle, panelTitle );
 
 	// Load a panel
 	Array< VRMenuComponent* > panelComps;
@@ -1986,7 +1995,7 @@ void OvrFolderBrowser::AddPanelToFolder( const OvrMetaDatum * panoData, const in
 	OVR_ASSERT( folderIndex < Folders.GetSizeI() );
 	
 	// Create or load thumbnail - request built up here to be processed ThumbnailThread
-	const String & panoUrl = panoData->Url;
+	const String & panoUrl = ThumbUrl( panoData );
 	const String thumbName = ThumbName( panoUrl );
 	String finalThumb;
 	char relativeThumbPath[ 1024 ];
@@ -2198,7 +2207,7 @@ const OvrMetaDatum * OvrFolderBrowser::NextFileInDirectory( const int step )
 	{
 		nextPanelIndex = numPanels - 1;
 	}
-		
+
 	PanelView & panel = folder->Panels.At( nextPanelIndex );
 	VRMenuObject * panelObject = AppPtr->GetVRMenuMgr().ToObject( panel.Handle );
 	OVR_ASSERT( panelObject );

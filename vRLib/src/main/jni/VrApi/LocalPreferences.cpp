@@ -90,7 +90,7 @@ const char * ovr_GetLocalPreferenceValueForKey( const char * keyName, const char
 			return LocalPreferences[i].Value.ToCStr();
 		}
 	}
-	LOG( "Key %s not found, returning default %s", keyName, defaultKeyValue );
+	//LOG( "Key %s not found, returning default %s", keyName, defaultKeyValue );
 
 	return defaultKeyValue;
 }

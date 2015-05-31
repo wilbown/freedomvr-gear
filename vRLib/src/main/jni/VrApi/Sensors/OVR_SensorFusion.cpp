@@ -602,6 +602,9 @@ Posef calcPredictedPose(const PoseStatef& poseState, float predictionDt )
 	if (candidateDt < predictionDt)
 		dynamicDt = candidateDt;
 
+	const float MAX_DELTA_TIME = 1.0f / 10.0f;
+	dynamicDt = Alg::Clamp( dynamicDt, 0.0f, MAX_DELTA_TIME );
+
     if (angularSpeed > 0.001)
         pose.Orientation = pose.Orientation * Quatf(angularVelocity, angularSpeed * dynamicDt);
 

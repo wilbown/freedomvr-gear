@@ -36,6 +36,11 @@ const char * const TAGS = "tags";
 const char * const CATEGORY = "category";
 const char * const URL_INNER = "url";
 
+static bool OvrMetaDatumIdComparator( const OvrMetaDatum * a, const OvrMetaDatum * b)
+{
+	return a->Id < b->Id;
+}
+
 void OvrMetaData::InitFromDirectory( const char * relativePath, const Array< String > & searchPaths, const OvrMetaDataFileExtensions & fileExtensions )
 {
 	LOG( "OvrMetaData::InitFromDirectory( %s )", relativePath );
@@ -459,25 +464,11 @@ void OvrMetaData::ReconcileMetaData( StringHash< OvrMetaDatum * > & storedMetaDa
 	{
 		return;
 	}
+    DedupMetaData( MetaData, storedMetaData );
 
-	// Fix the read in meta data using the stored
-	for ( int i = 0; i < MetaData.GetSizeI(); ++i )
-	{
-		OvrMetaDatum * metaDatum = MetaData.At( i );
-
-		StringHash< OvrMetaDatum * >::Iterator iter = storedMetaData.FindCaseInsensitive( metaDatum->Url );
-
-		if ( iter != storedMetaData.End() )
-		{
-			OvrMetaDatum * storedDatum = iter->Second;
-			LOG( "ReconcileMetaData metadata for %s", storedDatum->Url.ToCStr() );
-			Alg::Swap( storedDatum->Tags, metaDatum->Tags );
-			SwapExtendedData( storedDatum, metaDatum );
-			storedMetaData.Remove( iter->First );
-		}
-	}
-
-	// Now for any remaining stored data - check if it's remote and just add it
+	// Now for any remaining stored data - check if it's remote and just add it, sorted by the
+	// assigned Id
+	Array< OvrMetaDatum * > sortedEntries;
 	StringHash< OvrMetaDatum * >::Iterator storedIter = storedMetaData.Begin();
 	for ( ; storedIter != storedMetaData.End(); ++storedIter )
 	{
@@ -485,10 +476,36 @@ void OvrMetaData::ReconcileMetaData( StringHash< OvrMetaDatum * > & storedMetaDa
 		if ( IsRemote( storedDatum ) )
 		{
 			LOG( "ReconcileMetaData metadata adding remote %s", storedDatum->Url.ToCStr() );
-			MetaData.PushBack( storedDatum );
+			sortedEntries.PushBack( storedDatum );
 		}
 	}
+	Alg::QuickSortSlicedSafe( sortedEntries, 0, sortedEntries.GetSize(), OvrMetaDatumIdComparator);
+	Array< OvrMetaDatum * >::Iterator sortedIter = sortedEntries.Begin();
+	for ( ; sortedIter != sortedEntries.End(); ++sortedIter )
+	{
+		MetaData.PushBack( *sortedIter );
+	}
 	storedMetaData.Clear();
+}
+
+void OvrMetaData::DedupMetaData( const Array< OvrMetaDatum * > & existingData, StringHash< OvrMetaDatum * > & newData )
+{
+    // Fix the read in meta data using the stored
+    for ( int i = 0; i < existingData.GetSizeI(); ++i )
+    {
+        OvrMetaDatum * metaDatum = existingData.At( i );
+
+        StringHash< OvrMetaDatum * >::Iterator iter = newData.FindCaseInsensitive( metaDatum->Url );
+
+        if ( iter != newData.End() )
+        {
+            OvrMetaDatum * storedDatum = iter->Second;
+            LOG( "DedupMetaData metadata for %s", storedDatum->Url.ToCStr() );
+            Alg::Swap( storedDatum->Tags, metaDatum->Tags );
+            SwapExtendedData( storedDatum, metaDatum );
+            newData.Remove( iter->First );
+        }
+    }
 }
 
 void OvrMetaData::ReconcileCategories( Array< Category > & storedCategories )
@@ -611,7 +628,7 @@ void OvrMetaData::ExtractMetaData( JSON * dataFile, const Array< String > & sear
 	const JsonReader data( dataFile->GetItemByName( DATA ) );
 	if ( data.IsArray() )
 	{
-		int jsonIndex = 0;
+		int jsonIndex = MetaData.GetSizeI();
 		while ( const JSON * nextElement = data.GetNextArrayElement() )
 		{
 			const JsonReader datum( nextElement );
@@ -688,7 +705,7 @@ void OvrMetaData::ExtractRemoteMetaData( JSON * dataFile, StringHash< OvrMetaDat
 	const JsonReader data( dataFile->GetItemByName( DATA ) );
 	if ( data.IsArray() )
 	{
-		int jsonIndex = 0;
+		int jsonIndex = MetaData.GetSizeI();
 		while ( const JSON * nextElement = data.GetNextArrayElement() )
 		{
 			const JsonReader jsonDatum( nextElement );

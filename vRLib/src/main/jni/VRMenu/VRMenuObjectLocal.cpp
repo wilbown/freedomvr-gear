@@ -1103,7 +1103,7 @@ Bounds3f VRMenuObjectLocal::GetTextLocalBounds( BitmapFont const & font ) const
 	Vector3f trans = Vector3f::ZERO;
 	switch( FontParms.AlignVert )
 	{
-		case VERTICAL_BOTTOM :
+		case VERTICAL_BASELINE :
 			trans.y = 0.0f;
 			break;
 

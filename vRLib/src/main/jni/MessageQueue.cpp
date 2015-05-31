@@ -31,7 +31,8 @@ MessageQueue::MessageQueue( int maxMessages_ ) :
 	maxMessages( maxMessages_ ),
 	messages( new message_t[ maxMessages_ ] ),
 	head( 0 ),
-	tail( 0 )
+	tail( 0 ),
+	synced( false )
 {
 	assert( maxMessages > 0 );
 
@@ -82,7 +83,7 @@ void MessageQueue::Shutdown()
 // the buffer.
 // The app will abort() with a dump of all messages if the message
 // buffer overflows.
-bool MessageQueue::PostMessage( const char * msg, bool synced, bool abortIfFull )
+bool MessageQueue::PostMessage( const char * msg, bool sync, bool abortIfFull )
 {
 	if ( shutdown )
 	{
@@ -101,7 +102,7 @@ bool MessageQueue::PostMessage( const char * msg, bool synced, bool abortIfFull 
 		if ( abortIfFull )
 		{
 			LOG( "MessageQueue overflow" );
-			for ( int i = head; i <= tail; i++ )
+			for ( int i = head; i < tail; i++ )
 			{
 				LOG( "%s", messages[i % maxMessages].string );
 			}
@@ -111,10 +112,10 @@ bool MessageQueue::PostMessage( const char * msg, bool synced, bool abortIfFull 
 	}
 	const int index = tail % maxMessages;
 	messages[index].string = strdup( msg );
-	messages[index].synced = synced;
+	messages[index].synced = sync;
 	tail++;
 	pthread_cond_signal( &posted );
-	if ( synced )
+	if ( sync )
 	{
 		pthread_cond_wait( &received, &mutex );
 	}
@@ -178,12 +179,13 @@ const char * MessageQueue::GetNextMessage()
 		synced = false;
 	}
 
+	pthread_mutex_lock( &mutex );
 	if ( tail <= head )
 	{
+		pthread_mutex_unlock( &mutex );
 		return NULL;
 	}
 
-	pthread_mutex_lock( &mutex );
 	const int index = head % maxMessages;
 	const char * msg = messages[index].string;
 	synced = messages[index].synced;
@@ -203,8 +205,16 @@ const char * MessageQueue::GetNextMessage()
 // Returns immediately if there is already a message in the queue.
 void MessageQueue::SleepUntilMessage()
 {
+	if ( synced )
+	{
+		pthread_cond_signal( &received );
+		synced = false;
+	}
+
+	pthread_mutex_lock( &mutex );
 	if ( tail > head )
 	{
+		pthread_mutex_unlock( &mutex );
 		return;
 	}
 
@@ -213,13 +223,6 @@ void MessageQueue::SleepUntilMessage()
 		LOG( "%p:SleepUntilMessage() : sleep", this );
 	}
 
-	if ( synced )
-	{
-		pthread_cond_signal( &received );
-		synced = false;
-	}
-
-	pthread_mutex_lock( &mutex );
 	pthread_cond_wait( &posted, &mutex );
 	pthread_mutex_unlock( &mutex );
 

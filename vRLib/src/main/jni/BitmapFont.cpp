@@ -129,7 +129,9 @@ public:
 		ScaleFactorX( 1.0f ),
 		ScaleFactorY( 1.0f ),
 		TweakScale( 1.0f ),
-		CenterOffset( 0.0f )
+		CenterOffset( 0.0f ),
+		MaxAscent( 0.0f ),
+		MaxDescent( 0.0f )
 	{
 	}
 
@@ -148,6 +150,8 @@ public:
 	float						ScaleFactorY;	// y-axis scale factor 
 	float						TweakScale;		// additional scale factor used to tweak the size of other-language fonts
 	float						CenterOffset;	// +/- value applied to "center" distance in the signed distance field. Range [-1,1]. A negative offset will make the font appear bolder.
+	float						MaxAscent;		// maximum ascent of any character
+	float						MaxDescent;		// maximum descent of any character
 	OVR::Array< FontGlyphType >	Glyphs;			// info about each glyph in the font
 	OVR::Array< int32_t >		CharCodeMap;	// index by character code to get the index of a glyph for the character
 
@@ -557,6 +561,7 @@ bool FontInfoType::LoadFromBuffer( void const * buffer, size_t const bufferSize 
 
 	double oWidth = 0.0;
 	double oHeight = 0.0;
+
 	if ( jsonGlyphArray.IsArray() )
 	{
 		for ( int i = 0; i < Glyphs.GetSizeI() && !jsonGlyphArray.IsEndOfArray(); i++ )
@@ -589,6 +594,17 @@ bool FontInfoType::LoadFromBuffer( void const * buffer, size_t const bufferSize 
 				g.AdvanceY *= nhScale;
 				g.BearingX *= nwScale;
 				g.BearingY *= nhScale;
+
+				float const ascent = g.BearingY;
+				float const descent = g.Height - g.BearingY;
+				if ( ascent > MaxAscent )
+				{
+					MaxAscent = ascent;
+				}
+				if ( descent > MaxDescent )
+				{
+					MaxDescent = descent;
+				}
 
 				maxCharCode = Alg::Max( maxCharCode, g.CharCode );
 			}
@@ -1026,7 +1042,7 @@ void BitmapFontLocal::CalcTextMetrics( char const * text, size_t & len, float & 
 	float maxLineDescent = 0.0f;
 	firstAscent = 0.0f;
 	lastDescent = 0.0f;
-	fontHeight = FontInfo.FontHeight;
+	fontHeight = FontInfo.FontHeight * FontInfo.ScaleFactorY;
 	numLines = 0;
 	int charsOnLine = 0;
 	lineWidths[0] = 0.0f;
@@ -1264,7 +1280,7 @@ void BitmapFontSurfaceLocal::DrawText3D( BitmapFont const & font, fontParms_t co
 	Vector3f curPos( 0.0f );
 	switch( parms.AlignVert )
 	{
-		case VERTICAL_BOTTOM :
+		case VERTICAL_BASELINE :
 			break;
 
 		case VERTICAL_CENTER :
@@ -1275,8 +1291,15 @@ void BitmapFontSurfaceLocal::DrawText3D( BitmapFont const & font, fontParms_t co
 		}
 		case VERTICAL_CENTER_FIXEDHEIGHT :
 		{
-			float const vofs = ( fontHeight * -0.5f );
-			curPos += u * ( vofs * scale );
+			// for fixed height, we must adjust single-line text by the max ascent because fonts 
+			// are rendered according to their baseline. For multiline text, the first line 
+			// contributes max ascent only while the other lines are adjusted by font height.
+			float const ma = AsLocal( font ).GetFontInfo().MaxAscent;
+			float const md = AsLocal( font ).GetFontInfo().MaxDescent;
+			float const fh = AsLocal( font ).GetFontInfo().FontHeight;
+			float const adjust = ( ma - md ) * 0.5f;
+			float const vofs = ( fh * ( numLines - 1 ) * 0.5f ) - adjust;
+			curPos += u * ( vofs * yScale );
 			break;
 		}
 		case VERTICAL_TOP :
@@ -1498,7 +1521,13 @@ void BitmapFontSurfaceLocal::Finish( Matrix4f const & viewMatrix )
 			else
 			{
                 Vector3f textNormal = viewPos - vb.Pivot;
-                textNormal.Normalize();
+				float const len = textNormal.Length();
+				if ( len < Mathf::SmallestNonDenormal )
+				{
+					vb.Free();
+					continue;
+				}
+                textNormal *= 1.0f / len;
                 transform = Matrix4f::CreateFromBasisVectors( textNormal, Vector3f( 0.0f, 1.0f, 0.0f ) );
 			}
 			transform.SetTranslation( vb.Pivot );

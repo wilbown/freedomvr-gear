@@ -265,27 +265,24 @@ void VRMenu::Frame( App * app, VrFrame const & vrFrame, OvrVRMenuMgr & menuMgr,
 
 	if ( NextMenuState != CurMenuState )
 	{
+		LOG( "NextMenuState for '%s': %s", GetName(), MenuStateNames[NextMenuState] );
 		switch( NextMenuState )
 		{
             case MENUSTATE_OPENING:
-                LOG( "MENUSTATE_OPENING" );
 				RepositionMenu( app, viewMatrix );
 				EventHandler->Opening( events );
                 break;
 			case MENUSTATE_OPEN:
 				{
-					LOG( "MENUSTATE_OPEN" );
 					OpenSoundLimiter.PlayMenuSound( app, Name, "sv_release_active", 0.1 );
 					EventHandler->Opened( events );
 				}
 				break;
             case MENUSTATE_CLOSING:
-                LOG( "MENUSTATE_CLOSING" );
 				EventHandler->Closing( events );
                 break;
 			case MENUSTATE_CLOSED:
 				{
-					LOG( "MENUSTATE_CLOSED" );
 					CloseSoundLimiter.PlayMenuSound( app, Name, "sv_deselect", 0.1 );
 					EventHandler->Closed( events );
 				}
@@ -527,9 +524,19 @@ menuHandle_t VRMenu::GetFocusedHandle() const
 	return menuHandle_t();
 }
 
-void VRMenu::ResetMenuOrientation( App * app )
+//==============================
+// VRMenu::ResetMenuOrientation
+void VRMenu::ResetMenuOrientation( App * app, Matrix4f const & viewMatrix )
 {
-	MenuPose.Orientation = Quatf();
+	LOG( "ResetMenuOrientation for '%s'", GetName() );
+	ResetMenuOrientation_Impl( app, viewMatrix );
+}
+
+//==============================
+// VRMenuResetMenuOrientation_Impl
+void VRMenu::ResetMenuOrientation_Impl( App * app, Matrix4f const & viewMatrix )
+{
+	RepositionMenu( app, viewMatrix );
 }
 
 } // namespace OVR

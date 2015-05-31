@@ -9,8 +9,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 *************************************************************************************/
 
-#if !defined( OVR_LOCALE_H )
-#define OVR_LOCALE_H
+#if !defined( OVR_VRLOCALE_H )
+#define OVR_VRLOCALE_H
 
 #include "Kernel/OVR_String.h"
 #include <stdarg.h>
@@ -53,4 +53,4 @@ public:
 
 } // namespace OVR
 
-#endif	// OVR_LOCALE_H
+#endif	// OVR_VRLOCALE_H

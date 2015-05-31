@@ -32,7 +32,7 @@ public:
                                     BitmapFont const & font, BitmapFontSurface & fontSurface,
 									Matrix4f const & viewMatrix );
 	virtual bool			OnKeyEvent( App * app, int const keyCode, KeyState::eKeyEventType const eventType );
-	virtual void			ResetMenuOrientations( App * app );
+	virtual void			ResetMenuOrientations( App * app, Matrix4f const & viewMatrix );
 
     virtual void            AddMenu( VRMenu * menu );
 	virtual VRMenu *		GetMenu( char const * menuName ) const;

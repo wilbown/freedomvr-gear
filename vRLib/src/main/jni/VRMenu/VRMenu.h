@@ -134,7 +134,7 @@ public:
 	void					RepositionMenu( App * app );
 
 	//	Reset the MenuPose orientation - for now we assume identity orientation as the basis for all menus
-	virtual void			ResetMenuOrientation( App * app );
+	void					ResetMenuOrientation( App * app, Matrix4f const & viewMatrix );
 	
     VRMenuFlags_t const &	GetFlags() const { return Flags; }
 	void					SetFlags( VRMenuFlags_t	const & flags ) { Flags = flags; }
@@ -182,6 +182,7 @@ private:
     virtual void    Open_Impl( App * app, OvrGazeCursor & gazeCursor );
     virtual void    Close_Impl( App * app, OvrGazeCursor & gazeCursor );
 	virtual void	OnItemEvent_Impl( App * app, VRMenuId_t const itemId, class VRMenuEvent const & event );
+	virtual void	ResetMenuOrientation_Impl( App * app, Matrix4f const & viewMatrix );
 
 	// return true when finished opening/closing - allowing derived menus to animate etc. during open/close
 	virtual bool	IsFinishedOpening() const { return true;  }

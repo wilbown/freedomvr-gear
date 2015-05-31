@@ -74,9 +74,6 @@ public:
 	virtual void				RenderSubmitted( Matrix4f const & worldMVP, Matrix4f const & viewMatrix ) const = 0;
 
     virtual GlProgram const *   GetGUIGlProgram( eGUIProgramType const programType ) const = 0;
-
-	virtual void				SetShowDebugBounds( bool const b ) = 0;
-	virtual void				SetShowDebugHierarchy( bool const b ) = 0;
 };
 
 } // namespace OVR

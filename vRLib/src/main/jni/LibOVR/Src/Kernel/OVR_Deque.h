@@ -118,7 +118,7 @@ void Deque<Elem>::PushBack(const Elem &Item)
 {
     // Error Check: Make sure we aren't  
     // exceeding our maximum storage space
-    assert( ElemCount < Capacity );
+	OVR_ASSERT( ElemCount < Capacity );
 
     Data[ End++ ] = Item;
     ++ElemCount;
@@ -133,7 +133,7 @@ void Deque<Elem>::PushFront(const Elem &Item)
 {
     // Error Check: Make sure we aren't  
     // exceeding our maximum storage space
-    assert( ElemCount < Capacity );
+	OVR_ASSERT( ElemCount < Capacity );
 
     Beginning--;
     // Check for wrap-around
@@ -149,7 +149,7 @@ template <class Elem>
 Elem Deque<Elem>::PopFront(void)
 {
     // Error Check: Make sure we aren't reading from an empty Deque
-    assert( ElemCount > 0 );
+	OVR_ASSERT( ElemCount > 0 );
 
     Elem ReturnValue = Data[ Beginning++ ];
     --ElemCount;
@@ -165,7 +165,7 @@ template <class Elem>
 Elem Deque<Elem>::PopBack(void)
 {
     // Error Check: Make sure we aren't reading from an empty Deque
-    assert( ElemCount > 0 );
+	OVR_ASSERT( ElemCount > 0 );
 
     End--;
     // Check for wrap-around
@@ -183,7 +183,7 @@ template <class Elem>
 const Elem& Deque<Elem>::PeekFront(int count) const
 {
     // Error Check: Make sure we aren't reading from an empty Deque
-    assert( ElemCount > count );
+	OVR_ASSERT( ElemCount > count );
 
     int idx = Beginning + count;
     if (idx >= Capacity)
@@ -195,7 +195,7 @@ template <class Elem>
 const Elem& Deque<Elem>::PeekBack(int count) const
 {
     // Error Check: Make sure we aren't reading from an empty Deque
-    assert( ElemCount > count );
+	OVR_ASSERT( ElemCount > count );
 
     int idx = End - count - 1;
     if (idx < 0)

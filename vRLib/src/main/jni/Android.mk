@@ -104,6 +104,7 @@ LOCAL_SRC_FILES  := LibOVR/Src/Kernel/OVR_Alg.cpp \
                     VRMenu/VolumePopup.cpp \
                     VRMenu/ScrollManager.cpp \
                     VRMenu/ScrollBarComponent.cpp \
+                    VRMenu/ProgressBarComponent.cpp \
                     VRMenu/SwipeHintComponent.cpp \
                     VRMenu/MetaDataManager.cpp \
 					VRMenu/OutOfSpaceMenu.cpp \

@@ -151,6 +151,9 @@ void ovr_BroadcastSystemActivityEvent( ovrMobile * ovr, const char * actionName,
 void ovr_SendLaunchIntent( ovrMobile * ovr, const char * toPackageName, const char * command, 
 		const char * uri, eExitType exitType );
 bool ovr_StartSystemActivity( ovrMobile * ovr, const char * command, const char * jsonText );
+// fills outBuffer with a JSON text object with the required versioning info, the passed command, and embedded extraJsonText.
+bool ovr_CreateSystemActivityIntent( ovrMobile * ovr, const char * command, const char * extraJsonText, 
+		char * outBuffer, unsigned long long const outBufferSize, unsigned long long & outRequiredBufferSize );
 
 //-----------------------------------------------------------------
 // Activity start/exit

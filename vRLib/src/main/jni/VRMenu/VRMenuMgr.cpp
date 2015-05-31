@@ -264,6 +264,9 @@ public:
 
 	virtual void				SetShowDebugBounds( bool const b ) { ShowDebugBounds = b; }
 	virtual void				SetShowDebugHierarchy( bool const b ) { ShowDebugHierarchy = b; }
+	virtual void				SetShowPoses( bool const b ) { ShowPoses = b; }
+
+	static VRMenuMgrLocal &		ToLocal( OvrVRMenuMgr & menuMgr ) { return *(VRMenuMgrLocal*)&menuMgr; }
 
 private:
 	//--------------------------------------------------------------
@@ -299,17 +302,19 @@ private:
 
 	static bool			ShowDebugBounds;	// true to show the menu items' debug bounds. This is static so that the console command will turn on bounds for all activities.
 	static bool			ShowDebugHierarchy;	// true to show the menu items' hierarchy. This is static so that the console command will turn on bounds for all activities.
+	static bool			ShowPoses;
 };
 
 bool VRMenuMgrLocal::ShowDebugBounds = false;
 bool VRMenuMgrLocal::ShowDebugHierarchy = false;
+bool VRMenuMgrLocal::ShowPoses = false;
 
 void DebugMenuBounds( void * appPtr, const char * cmd )
 {
 	int show = 0;
 	sscanf( cmd, "%i", &show );
 	OVR_ASSERT( appPtr != NULL );	// something changed / broke in the OvrConsole code if this is NULL
-	((App*)appPtr)->GetVRMenuMgr().SetShowDebugBounds( show != 0 );
+	VRMenuMgrLocal::ToLocal( ( ( App* )appPtr )->GetVRMenuMgr() ).SetShowDebugBounds( show != 0 );
 }
 
 void DebugMenuHierarchy( void * appPtr, const char * cmd )
@@ -317,7 +322,15 @@ void DebugMenuHierarchy( void * appPtr, const char * cmd )
 	int show = 0;
 	sscanf( cmd, "%i", &show );
 	OVR_ASSERT( appPtr != NULL );	// something changed / broke in the OvrConsole code if this is NULL
-	( ( App* )appPtr )->GetVRMenuMgr().SetShowDebugHierarchy( show != 0 );
+	VRMenuMgrLocal::ToLocal( ( ( App* )appPtr )->GetVRMenuMgr() ).SetShowDebugHierarchy( show != 0 );
+}
+
+void DebugMenuPoses( void * appPtr, const char * cmd )
+{
+	int show = 0;
+	sscanf( cmd, "%i", &show );
+	OVR_ASSERT( appPtr != NULL );	// something changed / broke in the OvrConsole code if this is NULL
+	VRMenuMgrLocal::ToLocal( ( ( App* )appPtr )->GetVRMenuMgr() ).SetShowPoses( show != 0 );
 }
 
 //==================================
@@ -619,7 +632,7 @@ void VRMenuMgrLocal::SubmitForRenderingRecursive( OvrDebugLines & debugLines, Bi
 
 	Posef curModelPose;
 	curModelPose.Position = parentModelPose.Position + ( parentModelPose.Orientation * parentScale.EntrywiseMultiply( localPose.Position ) );
-	curModelPose.Orientation = localPose.Orientation * parentModelPose.Orientation;
+	curModelPose.Orientation = parentModelPose.Orientation * localPose.Orientation;
 
 	Vector4f curColor = parentColor * obj->GetColor();
 	Vector3f const & localScale = obj->GetLocalScale();
@@ -650,6 +663,17 @@ void VRMenuMgrLocal::SubmitForRenderingRecursive( OvrDebugLines & debugLines, Bi
 		if ( oFlags & VRMENUOBJECT_FLAG_BILLBOARD )
 		{
 			rFlags |= VRMENU_RENDER_BILLBOARD;
+		}
+
+		if ( ShowPoses )
+		{
+			Matrix4f const poseMat( itemPose );
+			debugLines.AddLine( itemPose.Position, itemPose.Position + poseMat.GetXBasis() * 0.05f, 
+					Vector4f( 0.0f, 1.0f, 0.0f, 1.0f ), Vector4f( 0.0f, 1.0f, 0.0f, 1.0f ), 0, false );	
+			debugLines.AddLine( itemPose.Position, itemPose.Position + poseMat.GetYBasis() * 0.05f, 
+					Vector4f( 1.0f, 0.0f, 0.0f, 1.0f ), Vector4f( 1.0f, 0.0f, 0.0f, 1.0f ), 0, false );	
+			debugLines.AddLine( itemPose.Position, itemPose.Position + poseMat.GetZBasis() * 0.05f, 
+					Vector4f( 0.0f, 0.0f, 1.0f, 1.0f ), Vector4f( 0.0f, 0.0f, 1.0f, 1.0f ), 0, false );	
 		}
 
 		// the menu object may have zero or more renderable surfaces (if 0, it may draw only text)
@@ -685,6 +709,8 @@ void VRMenuMgrLocal::SubmitForRenderingRecursive( OvrDebugLines & debugLines, Bi
 		{
             Posef const & textLocalPose = obj->GetTextLocalPose();
             Posef curTextPose;
+// FIXME: this doesn't mirror the scale / rotation order for the localPose above
+//            curTextPose.Position = itemPose.Position + ( itemPose.Orientation * scale.EntrywiseMultiply( textLocalPose.Position ) );
             curTextPose.Position = itemPose.Position + ( itemPose.Orientation * textLocalPose.Position * scale );
             curTextPose.Orientation = textLocalPose.Orientation * itemPose.Orientation;
             Vector3f textNormal = curTextPose.Orientation * Vector3f( 0.0f, 0.0f, 1.0f );
@@ -786,16 +812,26 @@ void VRMenuMgrLocal::SubmitForRenderingRecursive( OvrDebugLines & debugLines, Bi
 	// draw the hierarchy
 	if ( ShowDebugHierarchy )
 	{
+		fontParms_t fp;
+		fp.AlignHoriz = HORIZONTAL_CENTER;
+		fp.AlignVert = VERTICAL_CENTER;
+		fp.Billboard = true;
+#if 0
 		VRMenuObject const * parent = ToObject( obj->GetParentHandle() );
 		if ( parent != NULL )
 		{
-			fontParms_t fontParms;
 			Vector3f itemUp = curModelPose.Orientation * Vector3f( 0.0f, 1.0f, 0.0f );
 			Vector3f itemNormal = curModelPose.Orientation * Vector3f( 0.0f, 0.0f, 1.0f );
-			fontSurface.DrawText3D( font, fontParms, curModelPose.Position, itemNormal, itemUp,
-				1.0f, Vector4f( 1.0f, 0.0f, 1.0f, 1.0f ), parent->GetText().ToCStr() );
+			fontSurface.DrawTextBillboarded3D( font, fp, curModelPose.Position, itemNormal, itemUp,
+					0.5f, Vector4f( 1.0f, 0.0f, 1.0f, 1.0f ), obj->GetSurfaces()[0] ); //parent->GetText().ToCStr() );
 		}
+#endif
 		debugLines.AddLine( parentModelPose.Position, curModelPose.Position, Vector4f( 1.0f, 0.0f, 0.0f, 1.0f ), Vector4f( 0.0f, 0.0f, 1.0f, 1.0f ), 5, false );
+		if ( obj->GetSurfaces().GetSizeI() > 0 ) 
+		{
+			fontSurface.DrawTextBillboarded3D( font, fp, curModelPose.Position, 0.5f, 
+					Vector4f( 0.8f, 0.8f, 0.8f, 1.0f ), obj->GetSurfaces()[0].GetName().ToCStr() );
+		}
 	}
 }
 

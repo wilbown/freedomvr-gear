@@ -21,6 +21,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "OVRVersion.h"					// for vrlib build version
 #include "Kernel/OVR_String.h"			// for ReadFreq()
 #include "Kernel/OVR_JSON.h"			// needed for ovr_StartSystemActivity
+#include "Kernel/OVR_MemBuffer.h"		// needed for MemBufferT
 #include "Sensors/OVR_DeviceImpl.h"
 
 #include "DirectRender.h"
@@ -771,39 +772,77 @@ bool ovr_StartSystemActivity_JSON( ovrMobile * ovr, const char * jsonText )
 	return true;
 }
 
-// creates a JSON object with command and version info in it and combines that with a pre-serialized json object
-bool ovr_StartSystemActivity( ovrMobile * ovr, const char * command, const char * jsonText )
+// creates a command for sending to System Activities with optional embedded extra JSON text.
+bool ovr_CreateSystemActivityIntent( ovrMobile * ovr, const char * command, const char * extraJsonText, 
+		char * outBuffer, unsigned long long const outBufferSize, unsigned long long & outRequiredBufferSize )
 {
-	bool result = false;
-	OVR::JSON * jsonObj = OVR::JSON::CreateObject();
-	if ( jsonObj != NULL ) 
+	outRequiredBufferSize = 0;
+	if ( outBuffer == NULL || outBufferSize < 1 )
 	{
-		jsonObj->AddStringItem( "Command", command );
-		jsonObj->AddStringItem( "OVRVersion", ovr_GetVersionString() );
-		jsonObj->AddNumberItem( "PlatformUIVersion", PLATFORM_UI_VERSION );
-
-		char * text = jsonObj->PrintValue( 0, true );
-		if ( text != NULL ) 
-		{
-			// combine the JSON objects
-			if ( jsonText == NULL )
-			{
-				result = ovr_StartSystemActivity_JSON( ovr, text );
-			}
-			else
-			{
-				OVR::String combinedText = text;
-				combinedText.Remove( combinedText.GetLength() - 2 );	// strip off the } and a line feed
-				combinedText.AppendString( ",\n" );
-				combinedText.AppendString( jsonText );
-				combinedText.AppendString( "\n}" );
-				result = ovr_StartSystemActivity_JSON( ovr, combinedText.ToCStr() );
-			}
-			OVR_FREE( text );
-		}
-		jsonObj->Release();
+		return false;
 	}
-	return result;
+	outBuffer[0] = '\0';
+
+	OVR::JSON * jsonObj = OVR::JSON::CreateObject();
+	if ( jsonObj == NULL ) 
+	{
+		return false;
+	}
+
+	jsonObj->AddStringItem( "Command", command );
+	jsonObj->AddStringItem( "OVRVersion", ovr_GetVersionString() );
+	jsonObj->AddNumberItem( "PlatformUIVersion", PLATFORM_UI_VERSION );
+
+	char * text = jsonObj->PrintValue( 0, true );
+	jsonObj->Release();
+
+	if ( text == NULL ) 
+	{
+		return false;
+	}
+
+	// combine the JSON objects
+	if ( extraJsonText != NULL && extraJsonText[0] != '\0' )
+	{
+		OVR::String combinedText = text;
+		combinedText.Remove( combinedText.GetLength() - 2 );	// strip off the } and a line feed
+		combinedText.AppendString( ",\n" );
+		combinedText.AppendString( extraJsonText );
+		combinedText.AppendString( "\n}" );
+	}
+
+	outRequiredBufferSize = OVR::OVR_strlen( text ) + 1;
+	if ( outBufferSize < outRequiredBufferSize )
+	{
+		return false;
+	}
+
+	OVR::OVR_strcpy( outBuffer, outBufferSize, text );
+	OVR_FREE( text );
+
+	return true;
+}
+
+// creates a JSON object with command and version info in it and combines that with a pre-serialized json object
+bool ovr_StartSystemActivity( ovrMobile * ovr, const char * command, const char * extraJsonText )
+{
+	unsigned long long const INTENT_COMMAND_SIZE = 1024;
+	OVR::MemBufferT< char > intentBuffer( INTENT_COMMAND_SIZE );
+	unsigned long long requiredSize = 0;
+	if ( !ovr_CreateSystemActivityIntent( ovr, command, extraJsonText, intentBuffer, INTENT_COMMAND_SIZE, requiredSize ) )
+	{
+		OVR_ASSERT( requiredSize > INTENT_COMMAND_SIZE );	// if this isn't true, command creation failed for some other reason
+		// reallocate a buffer of the required size
+		intentBuffer.Realloc( requiredSize );
+		bool ok = ovr_CreateSystemActivityIntent( ovr, command, extraJsonText, intentBuffer, INTENT_COMMAND_SIZE, requiredSize );
+		if ( !ok )
+		{
+			OVR_ASSERT( ok );
+			return false;
+		}
+	}
+
+	return ovr_StartSystemActivity_JSON( ovr, intentBuffer );
 }
 
 void ovr_ExitActivity( ovrMobile * ovr, eExitType exitType )
@@ -1789,6 +1828,12 @@ void ovr_HandleHmdEvents( ovrMobile * ovr )
 	if ( dockState.DockState == HMT_DOCK_UNDOCKED )
 	{
 		LOG( "ovr_HandleHmdEvents::Hmt was disconnected" );
+
+		// reset the sensor info
+		if ( OvrHmdState != NULL )
+		{
+			OvrHmdState->ResetSensor();
+		}
 
 		// reset the real dock state since we're handling the change
 		HMTDockState.SetState( HMTDockState_t( HMT_DOCK_NONE ) );

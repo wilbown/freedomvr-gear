@@ -65,14 +65,14 @@ void OvrGuiSysLocal::Init( App * app, OvrVRMenuMgr & menuMgr, BitmapFont const &
 //==============================
 // OvrGuiSysLocal::RepositionMenus
 // Reposition any open menus 
-void OvrGuiSysLocal::ResetMenuOrientations( App * app )
+void OvrGuiSysLocal::ResetMenuOrientations( App * app, Matrix4f const & viewMatrix )
 {
 	for ( int i = 0; i < Menus.GetSizeI(); ++i )
 	{
 		if ( VRMenu* menu = Menus.At( i ) )
 		{
 			LOG( "ResetMenuOrientation -> '%s'", menu->GetName( ) );
-			menu->ResetMenuOrientation( app );
+			menu->ResetMenuOrientation( app, viewMatrix );
 		}
 	}
 }

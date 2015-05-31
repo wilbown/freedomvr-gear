@@ -36,17 +36,24 @@ public:
 	}
 	~JavaObject()
 	{
+		if ( jni->ExceptionOccurred() )
+		{
+			LOG( "JNI exception before DeleteLocalRef!" );
+			jni->ExceptionClear();
+		}
 		OVR_ASSERT( jni != NULL && JObject != NULL );
 		jni->DeleteLocalRef( JObject );
 		if ( jni->ExceptionOccurred() )
 		{
 			LOG( "JNI exception occured calling DeleteLocalRef!" );
+			jni->ExceptionClear();
 		}
 		jni = NULL;
 		JObject = NULL;
 	}
 
 	jobject			GetJObject() const { return JObject; }
+
 	JNIEnv *		GetJNI() const { return jni; }
 
 protected:
@@ -55,6 +62,19 @@ protected:
 private:
 	JNIEnv *		jni;
 	jobject			JObject;
+};
+
+//==============================================================
+// JavaClass
+class JavaClass : public JavaObject
+{
+public:
+	JavaClass( JNIEnv * jni_, jobject const object ) :
+		JavaObject( jni_, object )
+	{
+	}
+
+	jclass			GetJClass() const { return static_cast< jclass >( GetJObject() ); }
 };
 
 //==============================================================

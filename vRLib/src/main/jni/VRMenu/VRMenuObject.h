@@ -306,7 +306,7 @@ public:
 			float const alphaCenter,
 			float const scale ) :
 		AlignHoriz( centerHoriz ? HORIZONTAL_CENTER : HORIZONTAL_LEFT ),
-		AlignVert( centerVert ? VERTICAL_CENTER : VERTICAL_BOTTOM ),
+		AlignVert( centerVert ? VERTICAL_CENTER : VERTICAL_BASELINE ),
 		Billboard( billboard ),
 		TrackRoll( trackRoll ),
 		Outline( outline ),
@@ -323,7 +323,7 @@ public:
 			bool const outline,
 			float const scale ) :
 		AlignHoriz( centerHoriz ? HORIZONTAL_CENTER : HORIZONTAL_LEFT ),
-		AlignVert( centerVert ? VERTICAL_CENTER : VERTICAL_BOTTOM ),
+		AlignVert( centerVert ? VERTICAL_CENTER : VERTICAL_BASELINE ),
 		Billboard( billboard ),
 		TrackRoll( trackRoll ),
 		Outline( outline ),

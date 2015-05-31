@@ -35,7 +35,7 @@ Fader::Fader( float const startAlpha ) :
 // Fader::Update
 void Fader::Update( float const fadeRate, double const deltaSeconds )
 {
-    if ( FadeState > FADE_PAUSED )
+    if ( FadeState > FADE_PAUSED && deltaSeconds > 0.0f )
     {
         float const fadeDelta = ( fadeRate * deltaSeconds ) * ( FadeState == FADE_IN ? 1.0f : -1.0f );
         FadeAlpha += fadeDelta;

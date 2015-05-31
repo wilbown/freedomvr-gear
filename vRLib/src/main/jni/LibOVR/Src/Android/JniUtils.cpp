@@ -105,8 +105,8 @@ const char * ovr_GetCurrentPackageName( JNIEnv * jni, jclass activityClass, jobj
 {
 	packageName[0] = '\0';
 
-	jclass curActivityClass = jni->GetObjectClass( activityObject );
-	jmethodID getPackageNameId = jni->GetMethodID( curActivityClass, "getPackageName", "()Ljava/lang/String;");
+	JavaClass curActivityClass( jni, jni->GetObjectClass( activityObject ) );
+	jmethodID getPackageNameId = jni->GetMethodID( curActivityClass.GetJClass(), "getPackageName", "()Ljava/lang/String;");
 	if ( getPackageNameId != 0 )
 	{
 		JavaUTFChars result( jni, (jstring)jni->CallObjectMethod( activityObject, getPackageNameId ) );
@@ -124,9 +124,6 @@ const char * ovr_GetCurrentPackageName( JNIEnv * jni, jclass activityClass, jobj
 			LOG( "Cleared JNI exception" );
 		}
 	}
-
-	jni->DeleteLocalRef( curActivityClass );
-
 	LOG( "ovr_GetCurrentPackageName() = %s", packageName );
 	return packageName;
 }
@@ -135,29 +132,24 @@ const char * ovr_GetCurrentActivityName( JNIEnv * jni, jobject activityObject, c
 {
 	className[0] = '\0';
 
-	jclass curActivityClass = jni->GetObjectClass( activityObject );
-	jmethodID getClassMethodId = jni->GetMethodID( curActivityClass, "getClass", "()Ljava/lang/Class;" );
+	JavaClass curActivityClass( jni, jni->GetObjectClass( activityObject ) );
+	jmethodID getClassMethodId = jni->GetMethodID( curActivityClass.GetJClass(), "getClass", "()Ljava/lang/Class;" );
 	if ( getClassMethodId != 0 )
 	{
-		jobject classObj = jni->CallObjectMethod( activityObject, getClassMethodId );
-		jclass activityClass = jni->GetObjectClass( classObj );
+		JavaObject classObj( jni, jni->CallObjectMethod( activityObject, getClassMethodId ) );
+		JavaClass activityClass( jni, jni->GetObjectClass( classObj.GetJObject() ) );
 
-		jmethodID getNameMethodId = jni->GetMethodID( activityClass, "getName", "()Ljava/lang/String;" );
+		jmethodID getNameMethodId = jni->GetMethodID( activityClass.GetJClass(), "getName", "()Ljava/lang/String;" );
 		if ( getNameMethodId != 0 )
 		{
-			JavaUTFChars utfCurrentClassName( jni, (jstring)jni->CallObjectMethod( classObj, getNameMethodId ) );
+			JavaUTFChars utfCurrentClassName( jni, (jstring)jni->CallObjectMethod( classObj.GetJObject(), getNameMethodId ) );
 			const char * currentClassName = utfCurrentClassName.ToStr();
 			if ( currentClassName != NULL )
 			{
 				OVR::OVR_sprintf( className, maxLen, "%s", currentClassName );
 			}
 		}
-
-		jni->DeleteLocalRef( classObj );
-		jni->DeleteLocalRef( activityClass );
-	}
-
-	jni->DeleteLocalRef( curActivityClass );
+}
 
 	LOG( "ovr_GetCurrentActivityName() = %s", className );
 	return className;

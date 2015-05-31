@@ -374,6 +374,7 @@ void WaitForDebuggerToAttach()
 
 extern void DebugMenuBounds( void * appPtr, const char * cmd );
 extern void DebugMenuHierarchy( void * appPtr, const char * cmd );
+extern void DebugMenuPoses( void * appPtr, const char * cmd );
 extern void ShowFPS( void * appPtr, const char * cmd );
 
 /*
@@ -554,6 +555,7 @@ AppLocal::AppLocal( JNIEnv & jni_, jobject activityObject_, VrAppInterface & int
 	RegisterConsoleFunction( "print", OVR::DebugPrint );
 	RegisterConsoleFunction( "debugMenuBounds", OVR::DebugMenuBounds );
 	RegisterConsoleFunction( "debugMenuHierarchy", OVR::DebugMenuHierarchy );
+	RegisterConsoleFunction( "debugMenuPoses", OVR::DebugMenuPoses );
 	RegisterConsoleFunction( "showFPS", OVR::ShowFPS );
 }
 
@@ -622,7 +624,7 @@ void AppLocal::InitFonts()
 			if ( VrJni->ExceptionOccurred() )
 			{
 				VrJni->ExceptionClear();
-				WARN( "Exception occured in setDefaultLocale" );
+				WARN( "Exception occurred in setDefaultLocale" );
 			}
 			// re-get the font name for the new locale
 			VrLocale::GetString( GetVrJni(), GetJavaObject(), "@string/font_name", "efigs.fnt", fontName );
@@ -2801,6 +2803,7 @@ bool AppLocal::IsWifiConnected() const
 
 void AppLocal::RecenterYaw( const bool showBlack )
 {
+	LOG( "AppLocal::RecenterYaw" );
 	if ( showBlack )
 	{
 		const ovrTimeWarpParms warpSwapBlackParms = InitTimeWarpParms( WARP_INIT_BLACK );
@@ -2808,7 +2811,20 @@ void AppLocal::RecenterYaw( const bool showBlack )
 	}
 	ovr_RecenterYaw( OvrMobile );
 
-	GetGuiSys().ResetMenuOrientations( this );
+	// Change lastViewMatrix to mirror what is done to the sensor orientation by ovr_RecenterYaw.
+	// Get the current yaw rotation and cancel it out. This is necessary so that subsystems that
+	// rely on lastViewMatrix do not end up using the orientation from before the recenter if they
+	// are called before the beginning of the next frame.
+	float yaw;
+	float pitch;
+	float roll;
+	lastViewMatrix.ToEulerAngles< Axis_Y, Axis_X, Axis_Z, Rotate_CCW, Handed_R >( &yaw, &pitch, &roll );
+
+	// undo the yaw
+	Matrix4f unrotYawMatrix( Quatf( Axis_Y, -yaw ) );
+	lastViewMatrix = lastViewMatrix * unrotYawMatrix;
+
+	GetGuiSys().ResetMenuOrientations( this, lastViewMatrix );
 }
 
 void AppLocal::SetRecenterYawFrameStart( const long long frameNumber )

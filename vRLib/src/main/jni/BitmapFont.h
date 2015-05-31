@@ -30,9 +30,9 @@ enum HorizontalJustification
 
 enum VerticalJustification
 {
-	VERTICAL_BOTTOM,
+	VERTICAL_BASELINE,				// align text by baseline of first row
 	VERTICAL_CENTER,
-	VERTICAL_CENTER_FIXEDHEIGHT,  // ignores ascenders/descenders
+	VERTICAL_CENTER_FIXEDHEIGHT,	 // ignores ascenders/descenders
 	VERTICAL_TOP
 };
 
@@ -41,7 +41,7 @@ enum VerticalJustification
 struct fontParms_t {
     fontParms_t() :
     	AlignHoriz( HORIZONTAL_LEFT ),
-    	AlignVert( VERTICAL_BOTTOM ),
+    	AlignVert( VERTICAL_BASELINE ),
 		Billboard( false ),
 		TrackRoll( false ),
 		AlphaCenter( 0.425f ),

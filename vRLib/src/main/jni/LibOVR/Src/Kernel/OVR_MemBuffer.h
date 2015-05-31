@@ -56,9 +56,88 @@ public:
 	MemBuffer ToMemBuffer();
 };
 
-class MemBufferAPK
+//==============================================================
+// MemBufferT
+//
+// This allocates memory on construction and frees the memory on delete.
+// On copy assignment or copy construct any existing pointer in the destination
+// is freed, the pointer from the source is assigned to the destination and
+// the pointer in the source is cleared.
+template< class C >
+class MemBufferT
 {
+public:
+	// allocates a buffer of the specified size.
+	explicit MemBufferT( unsigned long long const size )
+		: Buffer( 0 )
+		, Size( size )
+	{
+		Buffer = new C[size];
+	}
 
+	// explicit copy construtor. This is explicit so these objects don't accidentally
+	// get passed by value.
+	explicit MemBufferT( MemBufferT & other )
+		: Buffer( other.Buffer )
+		, Size( other.Size )
+	{
+		other.Buffer = 0;
+		other.Size = 0;
+	}
+
+	// frees the buffer on deconstruction
+	~MemBufferT()
+	{
+		Free();
+	}
+
+	// returns a const pointer to the buffer
+	operator C const * () const { return Buffer; }
+	
+	// returns a non-const pointer to the buffer
+	operator C * () { return Buffer; }
+
+	unsigned long long	GetSize() const { return Size; }
+
+	// assignment operator
+	MemBufferT & operator = ( MemBufferT & other )
+	{
+		if ( &other == this )
+		{
+			return *this;
+		}
+
+		Free();	// free existing data before copying
+
+		Buffer = other.Buffer;
+		Size = other.Size;
+		other.Buffer = 0;
+		other.Size = 0;
+	}
+
+	// frees any existing buffer and allocates a new buffer of the specified size
+	void Realloc( unsigned long long size )
+	{
+		Free();
+
+		Buffer = new C[size];
+		Size = size;
+	}
+
+private:
+	C *					Buffer;
+	unsigned long long	Size;
+
+private:
+	MemBufferT() : Buffer( 0 ), Size( 0 ) { }
+
+	// frees the existing buffer
+	void Free()
+	{
+		delete Buffer;
+		Buffer = 0;
+		Size = 0;
+	}
 };
 
 }	// namespace OVR

@@ -34,7 +34,6 @@ public:
 	// The app will abort() with a dump of all messages if the message
 	// buffer overflows.
 	void			PostString( const char * msg );
-
 	// Builds a printf string and sends it as a message.
 	void			PostPrintf( const char * fmt, ... );
 
@@ -45,6 +44,9 @@ public:
 	// Same as above but these wait until the message has been processed.
 	void			SendString( const char * msg );
 	void			SendPrintf( const char * fmt, ... );
+
+	// Returns the number slots available for new messages.
+	int				SpaceAvailable() const { return maxMessages - ( tail - head ); }
 
 	// The other methods are NOT thread safe, and should only be
 	// called by the thread that owns the MessageQueue.
@@ -86,7 +88,7 @@ private:
 	pthread_cond_t	posted;
 	pthread_cond_t	received;
 
-	bool PostMessage( const char * msg, bool synced, bool abortIfFull );
+	bool PostMessage( const char * msg, bool sync, bool abortIfFull );
 };
 
 }	// namespace OVR
