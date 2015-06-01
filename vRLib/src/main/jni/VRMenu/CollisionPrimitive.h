@@ -13,8 +13,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #if !defined( OVR_CollisionPrimitive_h )
 #define OVR_CollisionPrimitive_h
 
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_BitFlags.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_BitFlags.h"
 #include "../GlGeometry.h" // For TriangleIndex
 
 namespace OVR {

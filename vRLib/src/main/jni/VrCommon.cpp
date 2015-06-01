@@ -22,9 +22,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <dirent.h>
 #include <fcntl.h>
 
-#include "Kernel/OVR_MemBuffer.h"
-#include "Android/GlUtils.h"		// for egl declarations
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_MemBuffer.h"
+#include "LibOVR/Src/Android/GlUtils.h"		// for egl declarations
+#include "LibOVR/Src/Android/LogUtils.h"
 
 namespace OVR {
 

@@ -13,9 +13,9 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 #if !defined( OVR_MetaDataManager_h )
 #define OVR_MetaDataManager_h
 
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_String.h"
-#include "Kernel/OVR_StringHash.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"
+#include "LibOVR/Src/Kernel/OVR_StringHash.h"
 
 namespace OVR {
 class JSON;

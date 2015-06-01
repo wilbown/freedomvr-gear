@@ -12,7 +12,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_Distortion_h
 #define OVR_Distortion_h
 
-#include "Kernel/OVR_MemBuffer.h"
+#include "LibOVR/Src/Kernel/OVR_MemBuffer.h"
 #include "HmdInfo.h"
 
 namespace OVR

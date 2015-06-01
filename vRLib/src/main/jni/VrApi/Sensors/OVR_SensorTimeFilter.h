@@ -14,7 +14,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_SensorTimeFilter_h
 #define OVR_SensorTimeFilter_h
 
-#include "Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
 
 namespace OVR {  
     

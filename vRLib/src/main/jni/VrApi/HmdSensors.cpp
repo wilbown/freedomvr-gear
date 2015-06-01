@@ -12,7 +12,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "HmdSensors.h"
 
 #include <unistd.h>					// gettid()
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 HMDState::HMDState() :
 		SensorStarted( 0 ),

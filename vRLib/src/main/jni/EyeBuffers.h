@@ -13,8 +13,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include <jni.h>
 
-#include "Android/GlUtils.h"		// GLuint
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"		// GLuint
+#include "LibOVR/Src/Android/LogUtils.h"
 
 namespace OVR {
 

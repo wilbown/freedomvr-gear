@@ -17,9 +17,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "OVR_OSX_HMDDevice.h"
 #include "OVR_OSX_HIDDevice.h"
 
-#include "Kernel/OVR_Timer.h"
-#include "Kernel/OVR_Std.h"
-#include "Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_Timer.h"
+#include "LibOVR/Src/Kernel/OVR_Std.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
 
 #include <IOKit/hid/IOHIDManager.h>
 #include <IOKit/hid/IOHIDKeys.h>

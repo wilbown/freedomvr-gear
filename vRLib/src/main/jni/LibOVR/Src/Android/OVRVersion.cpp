@@ -1,4 +1,4 @@
-#include "OVRVersion.h"
+#include "LibOVR/Include/OVRVersion.h"
 
 #define STRINGIZE( x )			#x
 #define STRINGIZE_VALUE( x )	STRINGIZE( x )

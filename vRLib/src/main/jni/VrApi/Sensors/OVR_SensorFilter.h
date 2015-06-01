@@ -13,9 +13,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_SensorFilter_h
 #define OVR_SensorFilter_h
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Deque.h"
-#include "Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Deque.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
 
 namespace OVR {
 

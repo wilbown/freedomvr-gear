@@ -14,7 +14,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #define OVR_GyroTempCalibration_h
 
 #include "OVR_Device.h"
-#include "Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
 
 namespace OVR {
 

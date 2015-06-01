@@ -14,8 +14,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_ImageServer_h
 #define OVR_ImageServer_h
 
-#include "Kernel/OVR_Lockless.h"
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Lockless.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 
 #include "WarpGeometry.h"
 #include "WarpProgram.h"

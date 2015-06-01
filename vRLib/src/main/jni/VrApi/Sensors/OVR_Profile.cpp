@@ -18,11 +18,11 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "OVR_Profile.h"
 
-#include "Kernel/OVR_JSON.h"
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_SysFile.h"
-#include "Kernel/OVR_Allocator.h"
-#include "Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_SysFile.h"
+#include "LibOVR/Src/Kernel/OVR_Allocator.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
 
 #ifdef OVR_OS_WIN32
 #include <Shlobj.h>

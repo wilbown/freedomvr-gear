@@ -18,9 +18,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "OVR_DeviceMessages.h"
 #include "OVR_HIDDeviceBase.h"
 
-#include "Kernel/OVR_Atomic.h"
-#include "Kernel/OVR_RefCount.h"
-#include "Kernel/OVR_String.h"
+#include "LibOVR/Src/Kernel/OVR_Atomic.h"
+#include "LibOVR/Src/Kernel/OVR_RefCount.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"
 
 
 namespace OVR {

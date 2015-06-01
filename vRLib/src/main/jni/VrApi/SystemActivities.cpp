@@ -9,11 +9,11 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 *************************************************************************************/
 
-#include "OVR.h"
-#include "Kernel/OVR_Std.h"
-#include "Kernel/OVR_JSON.h"
-#include "Android/LogUtils.h"
-#include "Android/JniUtils.h"
+#include "LibOVR/Include/OVR.h"
+#include "LibOVR/Src/Kernel/OVR_Std.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Android/LogUtils.h"
+#include "LibOVR/Src/Android/JniUtils.h"
 #include "VrApi/VrApi.h"
 #include "VrApi/VrApi_Android.h"
 

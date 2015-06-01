@@ -11,7 +11,7 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_WarpGeometry_h
 #define OVR_WarpGeometry_h
 
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 
 namespace OVR {
 

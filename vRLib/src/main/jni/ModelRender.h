@@ -11,10 +11,10 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_ModelRender_h
 #define OVR_ModelRender_h
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_String.h"
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 
 #include "GlTexture.h"
 #include "GlGeometry.h"

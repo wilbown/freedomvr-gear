@@ -11,7 +11,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_Vsync_h
 #define OVR_Vsync_h
 
-#include "Kernel/OVR_Lockless.h"	// for LocklessUpdater
+#include "LibOVR/Src/Kernel/OVR_Lockless.h"	// for LocklessUpdater
 
 // Application code should not interact with this, all timing information
 // should be taken from VrShell.

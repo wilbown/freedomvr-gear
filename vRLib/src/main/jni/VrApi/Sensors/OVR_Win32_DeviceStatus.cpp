@@ -13,7 +13,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "OVR_Win32_HIDDevice.h"
 
-#include "Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
 
 #include <dbt.h>
 

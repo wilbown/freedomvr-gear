@@ -17,9 +17,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "OVR_Linux_HIDDevice.h"
 #include "OVR_Linux_HMDDevice.h"
 
-#include "Kernel/OVR_Timer.h"
-#include "Kernel/OVR_Std.h"
-#include "Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_Timer.h"
+#include "LibOVR/Src/Kernel/OVR_Std.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
 
 namespace OVR { namespace Linux {
 

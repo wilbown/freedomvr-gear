@@ -12,10 +12,10 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "GazeCursorLocal.h"
 
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_String_Utils.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_String_Utils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 #include "VrApi/VrApi.h"
 #include "GlTexture.h"
 #include "PackageFiles.h"			// for loading images from the assets folder

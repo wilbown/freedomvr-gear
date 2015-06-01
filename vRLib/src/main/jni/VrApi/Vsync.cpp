@@ -21,12 +21,12 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <sys/time.h>
 #include <sys/resource.h>
 
-#include "Kernel/OVR_Timer.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Timer.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 #include "VrApi.h"			// for ovr_GetTimeInSeconds()
 
 #if defined(OVR_ENABLE_CAPTURE)
-	#include <OVR_Capture.h>
+	#include "LibOVR/Src/Capture/include/OVR_Capture.h"
 #endif
 
 /*

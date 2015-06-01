@@ -11,7 +11,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "VRMenuComponent.h"
 
-#include "Android/Log.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 #include "VrApi/VrApi.h"		// ovrPoseStatef
 
 #include "../Input.h"

@@ -12,7 +12,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #if !defined( OVR_DebugLines_h )
 #define OVR_DebugLines_h
 
-#include "Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
 
 namespace OVR {
 

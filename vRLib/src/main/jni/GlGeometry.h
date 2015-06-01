@@ -11,8 +11,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_Geometry_h
 #define OVR_Geometry_h
 
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
 
 namespace OVR
 {

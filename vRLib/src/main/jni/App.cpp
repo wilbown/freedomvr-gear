@@ -21,12 +21,12 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <sys/resource.h>
 #include <unistd.h>						// usleep, etc
 
-#include "Kernel/OVR_System.h"
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_TypesafeNumber.h"
-#include "Kernel/OVR_JSON.h"
-#include "Android/JniUtils.h"
-#include "Android/NativeBuildStrings.h"
+#include "LibOVR/Src/Kernel/OVR_System.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_TypesafeNumber.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Android/JniUtils.h"
+#include "LibOVR/Src/Android/NativeBuildStrings.h"
 
 #include "3rdParty/stb/stb_image_write.h"
 

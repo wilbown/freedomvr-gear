@@ -12,7 +12,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 ************************************************************************************/
 
 #include "OVR_SensorTimeFilter.h"
-#include "Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
 
 
 #include <stdio.h>

@@ -10,8 +10,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 *************************************************************************************/
 
 #include "OVR_SensorCalibration.h"
-#include "Kernel/OVR_Log.h"
-#include "Kernel/OVR_Threads.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_Threads.h"
 #include <time.h>
 
 namespace OVR {

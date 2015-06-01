@@ -13,8 +13,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_LatencyTest_h
 #define OVR_LatencyTest_h
 
-#include "Kernel/OVR_String.h"
-#include "Kernel/OVR_List.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"
+#include "LibOVR/Src/Kernel/OVR_List.h"
 
 #include "OVR_Device.h"
 

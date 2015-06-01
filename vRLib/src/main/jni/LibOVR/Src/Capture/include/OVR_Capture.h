@@ -13,8 +13,8 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_CAPTURE_H
 #define OVR_CAPTURE_H
 
-#include <OVR_Capture_Config.h>
-#include <OVR_Capture_Types.h>
+#include "OVR_Capture_Config.h"
+#include "OVR_Capture_Types.h"
 
 #include <stdarg.h> // for va_list
 

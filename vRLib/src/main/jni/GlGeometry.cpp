@@ -15,11 +15,11 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <string.h>
 #include <assert.h>
 
-#include "Kernel/OVR_Alg.h"
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Array.h"
-#include "Android/GlUtils.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Android/GlUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 #include "GlProgram.h"
 

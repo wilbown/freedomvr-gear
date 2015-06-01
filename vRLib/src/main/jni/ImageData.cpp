@@ -16,9 +16,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <math.h>
 #include <stdlib.h>
 
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_Alg.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 namespace OVR {
 

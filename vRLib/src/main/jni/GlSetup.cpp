@@ -16,7 +16,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 // TODO: remove when new glext is available
 #define EGL_OPENGL_ES3_BIT_KHR      0x0040

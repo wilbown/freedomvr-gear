@@ -12,10 +12,10 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <unistd.h>						// usleep, etc
 #include <sys/syscall.h>
 
-#include "OVR.h"
-#include "Android/GlUtils.h"
-#include "Android/LogUtils.h"
-#include "Android/JniUtils.h"
+#include "LibOVR/Include/OVR.h"
+#include "LibOVR/Src/Android/GlUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
+#include "LibOVR/Src/Android/JniUtils.h"
 
 #include "VrApi/VrApi.h"
 #include "VrApi/VrApi_Android.h"
@@ -23,7 +23,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "VrApi/LocalPreferences.h"		// FIXME:VRAPI move to VrApi_Android.h?
 #include "VrApi/SystemActivities.h"
 
-#include "Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
 
 #include "GlStateSave.h"
 #include "MediaSurface.h"

@@ -16,9 +16,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "OVR_DeviceConstants.h"
 #include "OVR_DeviceHandle.h"
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_Color.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_Color.h"
 
 namespace OVR {
 

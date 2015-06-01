@@ -12,7 +12,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #define OVRMEDIASURFACE_H
 
 #include <jni.h>
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 #include "GlGeometry.h"
 #include "GlProgram.h"
 #include "SurfaceTexture.h"

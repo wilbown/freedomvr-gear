@@ -31,7 +31,7 @@ sdcard. If this file is found, it is solely used to load sounds.
 #if !defined( OVR_SoundManager_h )
 #define OVR_SoundManager_h
 
-#include "Kernel/OVR_StringHash.h"
+#include "LibOVR/Src/Kernel/OVR_StringHash.h"
 
 namespace OVR {
 

@@ -12,8 +12,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_PhoneSensors_h
 #define OVR_PhoneSensors_h
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_RefCount.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_RefCount.h"
 
 namespace OVR {
 

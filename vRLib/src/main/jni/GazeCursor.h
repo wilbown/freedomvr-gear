@@ -13,8 +13,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #if !defined( Ovr_GazeCursor_h )
 #define Ovr_GazeCursor_h
 
-#include "Kernel/OVR_TypesafeNumber.h"
-#include "Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_TypesafeNumber.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
 
 namespace OVR {
 

@@ -11,7 +11,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_Input_h
 #define OVR_Input_h
 
-#include "Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
 #include "VrApi/VrApi.h"
 
 namespace OVR

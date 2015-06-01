@@ -10,11 +10,11 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 
 ************************************************************************************/
 
-#include <OVR_Capture_GLES3.h>
+#include "LibOVR/Src/Capture/include/OVR_Capture_GLES3.h"
 
 #if defined(OVR_CAPTURE_HAS_GLES3)
 
-#include <OVR_Capture_Packets.h>
+#include "LibOVR/Src/Capture/include/OVR_Capture_Packets.h"
 #include "OVR_Capture_AsyncStream.h"
 
 #include <string.h> // memset

@@ -17,7 +17,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 // of latency to the output.
 
 #include <jni.h>
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 
 namespace OVR
 {

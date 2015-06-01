@@ -11,7 +11,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_GlSetup_h
 #define OVR_GlSetup_h
 
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 
 namespace OVR
 {

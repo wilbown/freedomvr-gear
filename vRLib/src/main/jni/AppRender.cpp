@@ -13,7 +13,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include <sys/time.h>
 
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 #include "VrApi/VrApi.h"
 #include "VrApi/VrApi_Helpers.h"
 
@@ -24,7 +24,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "AppLocal.h"
 #include "BitmapFont.h"
-#include "Kernel/OVR_TypesafeNumber.h"
+#include "LibOVR/Src/Kernel/OVR_TypesafeNumber.h"
 #include "GazeCursor.h"
 #include "VRMenu/VRMenuMgr.h"
 #include "VRMenu/GuiSys.h"

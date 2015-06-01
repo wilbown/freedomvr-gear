@@ -15,8 +15,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "OVR_Device.h"
 #include "OVR_SensorFilter.h"
-#include "Kernel/OVR_Lockless.h"
-#include "Kernel/OVR_Threads.h"
+#include "LibOVR/Src/Kernel/OVR_Lockless.h"
+#include "LibOVR/Src/Kernel/OVR_Threads.h"
 //#include <time.h>
 
 // VrApi forward declarations.

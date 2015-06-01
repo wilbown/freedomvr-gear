@@ -11,7 +11,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 *************************************************************************************/
 
 #include "ScrollManager.h"
-#include "Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
 #include "VrApi/Vsync.h"
 #include "Input.h"
 #include "VrCommon.h"

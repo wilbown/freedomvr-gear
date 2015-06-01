@@ -11,7 +11,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_TimeWarpLocal_h
 #define OVR_TimeWarpLocal_h
 
-#include "Kernel/OVR_Lockless.h"
+#include "LibOVR/Src/Kernel/OVR_Lockless.h"
 #include "TimeWarp.h"
 #include "VrApi.h"
 #include "ImageServer.h"

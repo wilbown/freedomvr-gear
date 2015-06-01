@@ -17,8 +17,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <sys/resource.h>
 #include <unistd.h>						// usleep, etc
 
-#include "OVR.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Include/OVR.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 namespace OVR
 {

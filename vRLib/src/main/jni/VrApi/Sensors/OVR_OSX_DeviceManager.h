@@ -14,7 +14,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "OVR_DeviceImpl.h"
 
-#include "Kernel/OVR_Timer.h"
+#include "LibOVR/Src/Kernel/OVR_Timer.h"
 
 #include <IOKit/hid/IOHIDManager.h>
 #include <CoreGraphics/CGDirectDisplay.h>

@@ -14,7 +14,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <android/sensor.h>
 #include <android/looper.h>
 
-#include "Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
 
 #include <jni.h>
 

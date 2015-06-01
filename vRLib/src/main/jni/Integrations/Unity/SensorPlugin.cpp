@@ -12,6 +12,6 @@ Copyright   :   Copyright 2014 Oculus, Inc. All Rights reserved.
 #include <unistd.h>						// usleep, etc
 #include <sys/syscall.h>
 
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 #define OCULUS_EXPORT

@@ -13,14 +13,14 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #if !defined( OVR_VRMenuObject_h )
 #define OVR_VRMenuObject_h
 
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_String.h"
-#include "Kernel/OVR_TypesafeNumber.h"
-#include "Kernel/OVR_BitFlags.h"
-#include "Android/GlUtils.h"	// GLuint
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"
+#include "LibOVR/Src/Kernel/OVR_TypesafeNumber.h"
+#include "LibOVR/Src/Kernel/OVR_BitFlags.h"
+#include "LibOVR/Src/Android/GlUtils.h"	// GLuint
+#include "LibOVR/Src/Android/LogUtils.h"
 #include "CollisionPrimitive.h"
 #include "BitmapFont.h" // HorizontalJustification & VerticalJustification
 

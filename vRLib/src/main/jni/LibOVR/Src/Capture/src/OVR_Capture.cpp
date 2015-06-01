@@ -10,11 +10,11 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 
 ************************************************************************************/
 
-#include <OVR_Capture.h>
+#include "LibOVR/Src/Capture/include/OVR_Capture.h"
 #include "OVR_Capture_Socket.h"
 #include "OVR_Capture_AsyncStream.h"
 #include "OVR_Capture_StandardSensors.h"
-#include "OVR_Capture_Packets.h"
+#include "LibOVR/Src/Capture/include/OVR_Capture_Packets.h"
 
 #if defined(OVR_CAPTURE_DARWIN)
     #include <mach/mach_time.h>

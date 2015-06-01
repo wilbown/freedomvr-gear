@@ -13,7 +13,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #if !defined( OVR_ScrollManager_h )
 #define OVR_ScrollManager_h
 
-#include "Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
 
 namespace OVR {
 

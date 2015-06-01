@@ -12,8 +12,8 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 
 #include "MetaDataManager.h"
 
-#include "Kernel/OVR_JSON.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 #include "VrCommon.h"
 #include "PackageFiles.h"

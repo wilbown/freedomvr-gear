@@ -20,7 +20,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "GlUtils.h"
 
 #if defined(OVR_ENABLE_CAPTURE)
-	#include <OVR_Capture.h>
+	#include "LibOVR/Src/Capture/include/OVR_Capture.h"
 #endif
 
 // GPU Timer queries cause instability on current

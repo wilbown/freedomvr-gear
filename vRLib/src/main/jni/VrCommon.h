@@ -12,8 +12,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_VrCommon_h
 #define OVR_VrCommon_h
 
-#include "OVR.h"	// Matrix4f, etc
-#include "Kernel/OVR_StringHash.h"
+#include "LibOVR/Include/OVR.h"	// Matrix4f, etc
+#include "LibOVR/Src/Kernel/OVR_StringHash.h"
 #include "PathUtils.h"
 
 namespace OVR {

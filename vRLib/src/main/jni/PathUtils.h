@@ -12,8 +12,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #define OVR_PathUtils_h
 
 #include <jni.h>
-#include "Kernel/OVR_String.h"
-#include "Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
 
 namespace OVR
 {

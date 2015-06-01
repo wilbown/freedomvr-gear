@@ -47,7 +47,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <sys/time.h>
 #include <sys/resource.h>
 
-#include "Android/JniUtils.h"
+#include "LibOVR/Src/Android/JniUtils.h"
 #include "TimeWarpLocal.h"
 #include "Vsync.h"
 #include "Distortion.h"
@@ -56,8 +56,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "../embedded/oculus_loading_indicator.h"
 
 #if defined( OVR_ENABLE_CAPTURE )
-#include <OVR_Capture.h>
-#include <OVR_Capture_GLES3.h>
+#include "LibOVR/Src/Capture/include/OVR_Capture.h"
+#include "LibOVR/Src/Capture/include/OVR_Capture_GLES3.h"
 #endif
 
 ovrSensorState ovr_GetSensorStateInternal( double absTime );

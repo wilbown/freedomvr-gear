@@ -12,8 +12,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef MODELFILE_H
 #define MODELFILE_H
 
-#include "Kernel/OVR_System.h"	// Array
-#include "Kernel/OVR_String.h"	// String
+#include "LibOVR/Src/Kernel/OVR_System.h"	// Array
+#include "LibOVR/Src/Kernel/OVR_String.h"	// String
 #include "GlProgram.h"			// GlProgram
 #include "ModelRender.h"		// ModelState
 #include "ModelCollision.h"

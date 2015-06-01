@@ -22,9 +22,9 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_CAPTURE_LEGACYPACKETS_H
 #define OVR_CAPTURE_LEGACYPACKETS_H
 
-#include <OVR_Capture_Config.h>
-#include <OVR_Capture_Types.h>
-#include <OVR_Capture_Packets.h>
+#include "OVR_Capture_Config.h"
+#include "OVR_Capture_Types.h"
+#include "OVR_Capture_Packets.h"
 
 namespace OVR
 {

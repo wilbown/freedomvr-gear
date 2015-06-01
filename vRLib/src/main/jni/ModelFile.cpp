@@ -13,18 +13,18 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include <math.h>
 
-#include "Kernel/OVR_Alg.h"
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_String.h"
-#include "Kernel/OVR_String_Utils.h"
-#include "Kernel/OVR_JSON.h"
-#include "Kernel/OVR_BinaryFile.h"
-#include "Kernel/OVR_MappedFile.h"
-#include "Android/GlUtils.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"
+#include "LibOVR/Src/Kernel/OVR_String_Utils.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Kernel/OVR_BinaryFile.h"
+#include "LibOVR/Src/Kernel/OVR_MappedFile.h"
+#include "LibOVR/Src/Android/GlUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
-#include "unzip.h"
+#include "3rdParty/minizip/unzip.h"
 #include "GlTexture.h"
 #include "ModelRender.h"
 

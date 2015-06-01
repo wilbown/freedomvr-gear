@@ -13,7 +13,7 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_CAPTURE_FILEIO_H
 #define OVR_CAPTURE_FILEIO_H
 
-#include <OVR_Capture_Config.h>
+#include "LibOVR/Src/Capture/include/OVR_Capture_Config.h"
 
 // Using POSIX file handles improves perf by about 2x over stdio's fopen/fread/fclose...
 #define OVR_CAPTURE_USE_POSIX_FILES 1

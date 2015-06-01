@@ -12,9 +12,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "OVR_GyroTempCalibration.h"
 
-#include "Kernel/OVR_JSON.h"
-#include "Kernel/OVR_Log.h"
-#include "Kernel/OVR_String_Utils.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_String_Utils.h"
 
 #ifdef OVR_OS_WIN32
 #include <Shlobj.h>

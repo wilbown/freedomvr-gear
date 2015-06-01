@@ -12,11 +12,11 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "SoundLimiter.h"
 
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_TypesafeNumber.h"
-#include "Kernel/OVR_BitFlags.h"
-#include "Kernel/OVR_Math.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_TypesafeNumber.h"
+#include "LibOVR/Src/Kernel/OVR_BitFlags.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 #include "VrApi/VrApi.h"		// ovrPoseStatef
 
 #include "../Input.h"

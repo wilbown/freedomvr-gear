@@ -21,8 +21,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "BitmapFont.h"
 #include "TextFade_Component.h"
 #include "PackageFiles.h"
-#include "Kernel/OVR_String_Utils.h"
-#include "Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Kernel/OVR_String_Utils.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
 
 namespace OVR {
 

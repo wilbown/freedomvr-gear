@@ -21,8 +21,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
  */
 
 #include <pthread.h>
-#include "Android/GlUtils.h"		// GLuint, etc
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"		// GLuint, etc
+#include "LibOVR/Src/Android/LogUtils.h"
 #include "DirectRender.h"
 #include "VrApi.h"
 #include "HmdInfo.h"

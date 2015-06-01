@@ -11,10 +11,10 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "Console.h"
 
-#include "Android/JniUtils.h"
-#include "Android/LogUtils.h"
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_String.h"			// for ReadFreq()
+#include "LibOVR/Src/Android/JniUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"			// for ReadFreq()
 
 namespace OVR {
 

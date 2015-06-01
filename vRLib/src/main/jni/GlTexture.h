@@ -11,10 +11,10 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVRGLTEXTURE_H
 #define OVRGLTEXTURE_H
 
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_BitFlags.h"
-#include "Kernel/OVR_MemBuffer.h"
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_BitFlags.h"
+#include "LibOVR/Src/Kernel/OVR_MemBuffer.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 
 // Explicitly using unsigned instead of GLUint / GLenum to avoid including GL headers
 

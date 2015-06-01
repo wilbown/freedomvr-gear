@@ -13,7 +13,7 @@ Copyright   :   Copyright 2015 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_CAPTURE_STANDARDSENSORS_H
 #define OVR_CAPTURE_STANDARDSENSORS_H
 
-#include <OVR_Capture.h>
+#include "LibOVR/Src/Capture/include/OVR_Capture.h"
 #include "OVR_Capture_Thread.h"
 
 namespace OVR

@@ -13,12 +13,12 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #define OVR_DeviceImpl_h
 
 #include "OVR_Device.h"
-#include "Kernel/OVR_Atomic.h"
-#include "Kernel/OVR_Log.h"
-#include "Kernel/OVR_System.h"
+#include "LibOVR/Src/Kernel/OVR_Atomic.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_System.h"
 
-#include "Kernel/OVR_Threads.h"
-#include "Kernel/OVR_ThreadCommandQueue.h"
+#include "LibOVR/Src/Kernel/OVR_Threads.h"
+#include "LibOVR/Src/Kernel/OVR_ThreadCommandQueue.h"
 #include "OVR_HIDDevice.h"
 
 namespace OVR {

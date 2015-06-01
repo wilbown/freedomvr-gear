@@ -15,7 +15,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "OVR_DeviceImpl.h"
 #include "OVR_Win32_DeviceStatus.h"
 
-#include "Kernel/OVR_Timer.h"
+#include "LibOVR/Src/Kernel/OVR_Timer.h"
 
 
 namespace OVR { namespace Win32 {

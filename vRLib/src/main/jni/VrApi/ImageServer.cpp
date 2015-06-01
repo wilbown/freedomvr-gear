@@ -25,8 +25,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <unistd.h>
 #include <poll.h>
 
-#include "Kernel/OVR_Std.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Std.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 namespace OVR {
 

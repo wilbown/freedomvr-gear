@@ -10,9 +10,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 *************************************************************************************/
 
 #include "OVR_DeviceImpl.h"
-#include "Kernel/OVR_Atomic.h"
-#include "Kernel/OVR_Log.h"
-#include "Kernel/OVR_System.h"
+#include "LibOVR/Src/Kernel/OVR_Atomic.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_System.h"
 
 #include "OVR_DeviceImpl.h"
 #include "OVR_SensorDeviceImpl.h"

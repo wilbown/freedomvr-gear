@@ -12,7 +12,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #define OVR_JniUtils_h
 
 #include <jni.h>
-#include "Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
 #include "LogUtils.h"
 
 // Use this EVERYWHERE and you can insert your own catch here if you have string references leaking.

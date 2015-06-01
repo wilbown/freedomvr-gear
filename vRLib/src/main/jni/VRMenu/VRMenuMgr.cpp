@@ -12,7 +12,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "VRMenuMgr.h"
 
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 #include "../GlProgram.h"
 #include "../GlTexture.h"
 #include "../GlGeometry.h"

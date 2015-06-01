@@ -13,8 +13,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include <math.h>
 
-#include "Kernel/OVR_Alg.h"
-#include "Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
 
 namespace OVR
 {
@@ -102,7 +102,7 @@ bool Intersect_RayTriangle( const Vector3f & rayStart, const Vector3f & rayDir,
 /*
 
 	Stackless KD-Tree Traversal for High Performance GPU Ray Tracing
-	Stefan Popov, Johannes Günther, Hans-Peter Seidel, Philipp Slusallek
+	Stefan Popov, Johannes Gï¿½nther, Hans-Peter Seidel, Philipp Slusallek
 	Eurographics, Volume 26, Number 3, 2007
 
 */

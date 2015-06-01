@@ -11,9 +11,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "OVR_SensorFusion.h"
 
-#include "Kernel/OVR_Log.h"
-#include "Kernel/OVR_System.h"
-#include "Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_System.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
 
 
 //#define YAW_LOGGING

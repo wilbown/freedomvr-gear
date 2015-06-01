@@ -11,8 +11,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "JniUtils.h"
 
-#include "Kernel/OVR_Std.h"
-#include "Kernel/OVR_JSON.h"
+#include "LibOVR/Src/Kernel/OVR_Std.h"
+#include "LibOVR/Src/Kernel/OVR_JSON.h"
 
 jobject ovr_NewStringUTF( JNIEnv * jni, char const * str )
 {

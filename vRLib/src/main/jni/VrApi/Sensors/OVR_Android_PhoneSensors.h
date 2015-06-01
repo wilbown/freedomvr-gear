@@ -13,8 +13,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #define OVR_Android_PhoneSensors_h
 
 #include "OVR_PhoneSensors.h"
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Threads.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Threads.h"
 
 #include <android/sensor.h>
 

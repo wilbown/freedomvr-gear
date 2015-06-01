@@ -13,7 +13,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_GLSTATESAVE_H
 #define OVR_GLSTATESAVE_H
 
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 
 namespace OVR
 {

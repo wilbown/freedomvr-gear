@@ -13,7 +13,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #define OVR_OSX_HMDDevice_h
 
 #include "OVR_DeviceImpl.h"
-#include "Kernel/OVR_String.h"
+#include "LibOVR/Src/Kernel/OVR_String.h"
 #include "OVR_Profile.h"
 
 namespace OVR { namespace OSX {

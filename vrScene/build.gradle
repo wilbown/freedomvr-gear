@@ -10,11 +10,11 @@ android {
 
         ndk {
             moduleName "vrscene"
-            //cFlags "-DOVR_OS_ANDROID -DANDROID -DANDROID_NDK -Wall -Wextra -Wno-strict-aliasing -Wno-unused-parameter -Wno-missing-field-initializers -Wno-multichar -Wno-type-limits -Wno-invalid-offsetof -DOVR_BUILD_DEBUG=1 -O0 -g -DOVR_ENABLE_CAPTURE=1" // Define some macros
+            cFlags "-DOVR_OS_ANDROID -DANDROID -DANDROID_NDK -Wall -Wextra -Wno-strict-aliasing -Wno-unused-parameter -Wno-missing-field-initializers -Wno-multichar -Wno-type-limits -Wno-invalid-offsetof -DOVR_BUILD_DEBUG=1 -O0 -g -DOVR_ENABLE_CAPTURE=1" // Define some macros
             //ldLibs "GLESv3", "EGL", "log", "android" // Link with these libraries!
-            //ldLibs "GLESv3", "EGL", "OpenMAXAL", "log", "android", "z", "OpenSLES", "jpeg" // Link with these libraries!
-            //stl "gnustl_static"
-            //abiFilter "armeabi-v7a"
+            ldLibs "GLESv3", "EGL", "OpenMAXAL", "log", "android", "z", "OpenSLES", "jpeg" // Link with these libraries!
+            stl "gnustl_static"
+            abiFilter "armeabi-v7a"
         }
     }
     buildTypes {

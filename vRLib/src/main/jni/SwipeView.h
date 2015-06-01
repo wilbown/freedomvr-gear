@@ -12,8 +12,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_SwipeView_h
 #define OVR_SwipeView_h
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Array.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Array.h"
 #include "GlGeometry.h"
 #include "GlProgram.h"
 #include "GlTexture.h"

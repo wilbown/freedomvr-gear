@@ -11,8 +11,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "OVR_LatencyTest.h"
 
-#include "Kernel/OVR_Log.h"
-#include "Kernel/OVR_Timer.h"
+#include "LibOVR/Src/Kernel/OVR_Log.h"
+#include "LibOVR/Src/Kernel/OVR_Timer.h"
 
 namespace OVR {
 

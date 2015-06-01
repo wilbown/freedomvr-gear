@@ -13,10 +13,10 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #ifndef OVR_ThreadCommandQueue_h
 #define OVR_ThreadCommandQueue_h
 
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_List.h"
-#include "Kernel/OVR_Atomic.h"
-#include "Kernel/OVR_Threads.h"
+#include "LibOVR/Src/Kernel/OVR_Types.h"
+#include "LibOVR/Src/Kernel/OVR_List.h"
+#include "LibOVR/Src/Kernel/OVR_Atomic.h"
+#include "LibOVR/Src/Kernel/OVR_Threads.h"
 
 namespace OVR {
 

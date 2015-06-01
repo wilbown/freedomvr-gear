@@ -15,13 +15,13 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <unistd.h>						// gettid, usleep, etc
 #include <jni.h>
 
-#include "Android/GlUtils.h"
-#include "Android/JniUtils.h"
-#include "Android/NativeBuildStrings.h"
-#include "OVRVersion.h"					// for vrlib build version
-#include "Kernel/OVR_String.h"			// for ReadFreq()
-#include "Kernel/OVR_JSON.h"			// needed for ovr_StartSystemActivity
-#include "Kernel/OVR_MemBuffer.h"		// needed for MemBufferT
+#include "LibOVR/Src/Android/GlUtils.h"
+#include "LibOVR/Src/Android/JniUtils.h"
+#include "LibOVR/Src/Android/NativeBuildStrings.h"
+#include "LibOVR/Include/OVRVersion.h"					// for vrlib build version
+#include "LibOVR/Src/Kernel/OVR_String.h"			// for ReadFreq()
+#include "LibOVR/Src/Kernel/OVR_JSON.h"			// needed for ovr_StartSystemActivity
+#include "LibOVR/Src/Kernel/OVR_MemBuffer.h"		// needed for MemBufferT
 #include "Sensors/OVR_DeviceImpl.h"
 
 #include "DirectRender.h"
@@ -35,7 +35,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include "SystemActivities.h"
 
 #if defined( OVR_ENABLE_CAPTURE )
-#include <OVR_Capture.h>
+#include "LibOVR/Src/Capture/include/OVR_Capture.h"
 #endif
 
 // FIXME:VRAPI move to ovrMobile

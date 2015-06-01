@@ -13,7 +13,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include <stdio.h>
 #include "unistd.h"
-#include "Android/JniUtils.h"
+#include "LibOVR/Src/Android/JniUtils.h"
 #include "VrCommon.h"
 #include "App.h"
 

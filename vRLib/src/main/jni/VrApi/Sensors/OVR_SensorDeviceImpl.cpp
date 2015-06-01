@@ -13,8 +13,8 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 // HMDDeviceDesc can be created/updated through Sensor carrying DisplayInfo.
 
-#include "Kernel/OVR_Timer.h"
-#include "Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Kernel/OVR_Timer.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
 
 namespace OVR {
     

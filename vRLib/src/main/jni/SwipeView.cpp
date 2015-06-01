@@ -16,11 +16,11 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 #include <sys/types.h>
 #include <dirent.h>
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Alg.h"
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_TypesafeNumber.h"
-#include "Android/GlUtils.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_Alg.h"
+#include "LibOVR/Src/Kernel/OVR_Math.h"
+#include "LibOVR/Src/Kernel/OVR_TypesafeNumber.h"
+#include "LibOVR/Src/Android/GlUtils.h"
 
 #include "Input.h"
 #include "GlTexture.h"

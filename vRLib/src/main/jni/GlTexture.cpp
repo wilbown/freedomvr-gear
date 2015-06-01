@@ -11,10 +11,10 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "GlTexture.h"
 
-#include "OVR.h"
-#include "Kernel/OVR_SysFile.h"
-#include "Android/GlUtils.h"
-#include "Android/LogUtils.h"
+#include "LibOVR/Include/OVR.h"
+#include "LibOVR/Src/Kernel/OVR_SysFile.h"
+#include "LibOVR/Src/Android/GlUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 #include "3rdParty/stb/stb_image.h"
 
@@ -964,7 +964,7 @@ GlTexture LoadTextureKTX( const char * fileName, const unsigned char * buffer, c
 
 	const UByte fileIdentifier[12] =
 	{
-		'«', 'K', 'T', 'X', ' ', '1', '1', '»', '\r', '\n', '\x1A', '\n'
+		'ï¿½', 'K', 'T', 'X', ' ', '1', '1', 'ï¿½', '\r', '\n', '\x1A', '\n'
 	};
 
 	const OVR_KTX_HEADER & header = *(OVR_KTX_HEADER *)buffer;

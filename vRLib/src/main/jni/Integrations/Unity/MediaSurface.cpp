@@ -11,7 +11,7 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 #include "MediaSurface.h"
 
-#include "Android/LogUtils.h"
+#include "LibOVR/Src/Android/LogUtils.h"
 
 #include "GlStateSave.h"
 
