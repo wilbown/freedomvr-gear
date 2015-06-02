@@ -8,6 +8,6 @@ include ../../../../vRLib/import_vrlib.mk		# import VRLib for this module.  Do N
 include ../../../../vRLib/cflags.mk
 
 LOCAL_MODULE    := vrscene
-LOCAL_SRC_FILES  := VrScene.cpp
+LOCAL_SRC_FILES  := $(LOCAL_PATH)/VrScene.cpp
 
 include $(BUILD_SHARED_LIBRARY)

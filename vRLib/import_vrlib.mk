@@ -42,7 +42,7 @@ LOCAL_EXPORT_LDLIBS += -lz
 # audio
 LOCAL_EXPORT_LDLIBS += -lOpenSLES
 
-LOCAL_SRC_FILES := obj/local/armeabi-v7a/liboculus.a
+LOCAL_SRC_FILES := src/main/obj/local/armeabi-v7a/liboculus.a
 
 LOCAL_STATIC_LIBRARIES := jpeg
 

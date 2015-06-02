@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+
 android {
 	compileSdkVersion 19
 	buildToolsVersion "22.0.1"
@@ -11,9 +12,19 @@ android {
 			//cFlags "-DOVR_OS_ANDROID -DANDROID -DANDROID_NDK -Wall -Wextra -Wno-strict-aliasing -Wno-unused-parameter -Wno-missing-field-initializers -Wno-multichar -Wno-type-limits -Wno-invalid-offsetof -DOVR_BUILD_DEBUG=1 -O0 -g -DOVR_ENABLE_CAPTURE=1" // Define some macros
 			//ldLibs "GLESv3", "EGL", "OpenMAXAL", "log", "android", "z", "OpenSLES" // Link with these libraries!
 			//stl "gnustl_static"
-			//abiFilter "armeabi-v7a"
+			abiFilter "armeabi-v7a"
 		}
 	}
+	sourceSets.main{
+		jni.srcDirs = []
+		jniLibs.srcDir 'src/main/libs'
+	}
+
+	clean.dependsOn 'cleanNative'
+	tasks.withType(JavaCompile) {
+		compileTask -> compileTask.dependsOn buildNative
+	}
+
 	buildTypes {
 		release {
 			minifyEnabled false
@@ -22,6 +33,19 @@ android {
 	}
 	productFlavors {
 	}
+}
+
+task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
+	commandLine "C:\\Users\\Wil\\.android\\ndk\\ndk-build.cmd",
+			'-C', file('src/main/jni').absolutePath, // Change src/main/jni the relative path to your jni source
+			'-j', Runtime.runtime.availableProcessors(),
+			'all'
+}
+
+task cleanNative(type: Exec, description: 'Clean JNI object files') {
+	commandLine "C:\\Users\\Wil\\.android\\ndk\\ndk-build.cmd",
+			'-C', file('src/main/jni').absolutePath, // Change src/main/jni the relative path to your jni source
+			'clean'
 }
 
 dependencies {

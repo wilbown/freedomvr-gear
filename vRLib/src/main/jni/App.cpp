@@ -1070,7 +1070,7 @@ void AppLocal::Resume()
 		const char * showVignetteStr = ovr_GetLocalPreferenceValueForKey( LOCAL_PREF_DEV_SHOW_VIGNETTE, "1" );
 		showVignette = ( atoi( showVignetteStr ) > 0 );
 
-		const char * enableDebugOptionsStr = ovr_GetLocalPreferenceValueForKey( LOCAL_PREF_DEV_DEBUG_OPTIONS, "0" );
+		const char * enableDebugOptionsStr = ovr_GetLocalPreferenceValueForKey( LOCAL_PREF_DEV_DEBUG_OPTIONS, "1" );
 		enableDebugOptions =  ( atoi( enableDebugOptionsStr ) > 0 );
 
 		const char * enableGpuTimingsStr = ovr_GetLocalPreferenceValueForKey( LOCAL_PREF_DEV_GPU_TIMINGS, "0" );

@@ -26,7 +26,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/$(OCULUS)/LibOVR/Include \
                     $(LOCAL_PATH)/$(OCULUS)/LibOVR/Src \
                     $(LOCAL_PATH)/$(OCULUS)/3rdParty/minizip \
                     $(LOCAL_PATH)/$(OCULUS)
-LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 
 LOCAL_SRC_FILES  := LibOVR/Src/Kernel/OVR_Alg.cpp \
                     LibOVR/Src/Kernel/OVR_Allocator.cpp \
@@ -150,10 +149,12 @@ LOCAL_SRC_FILES +=	3rdParty/minizip/ioapi.c \
 					3rdParty/minizip/zip.c
 
 # OVR::Capture support...
-LOCAL_C_INCLUDES  += $(LOCAL_PATH)/LibOVR/Src/Capture/include
-LOCAL_SRC_FILES   += $(wildcard $(realpath $(LOCAL_PATH))/LibOVR/Src/Capture/src/*.cpp)
-LOCAL_CFLAGS      += -DOVR_ENABLE_CAPTURE=1
+#LOCAL_C_INCLUDES  += $(LOCAL_PATH)/$(OCULUS)/LibOVR/Src/Capture/include
+#LOCAL_C_INCLUDES  += $(LOCAL_PATH)/$(OCULUS)/LibOVR/Src/Capture/src
+#LOCAL_SRC_FILES   += $(wildcard $(realpath $(LOCAL_PATH))/LibOVR/Src/Capture/src/*.cpp)
+#LOCAL_CFLAGS      += -DOVR_ENABLE_CAPTURE=1
 
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES)
 
 # OpenGL ES 3.0
 LOCAL_EXPORT_LDLIBS := -lGLESv3
