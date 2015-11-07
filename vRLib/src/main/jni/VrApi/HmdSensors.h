@@ -39,6 +39,7 @@ public:
 	float					GetYaw();
 	void					SetYaw( float yaw );
 	void					RecenterYaw();
+	void					SetPosition( float x, float y, float z );
 
 	OVR::SensorState		PredictedSensorState( double absTime );
 

@@ -155,6 +155,32 @@ void SensorFusion::RecenterYaw()
 	RecenterMutex.Unlock();
 }
 
+void SensorFusion::SetPosition( float x, float y, float z )
+{
+//	// get the current state
+//	const StateForPrediction state = UpdatedState.GetState();
+//
+//    state.State.LinearVelocity.x = state.State.LinearVelocity.y = state.State.LinearVelocity.z = 0.0f;
+//    state.State.Transform.Position.x = x;
+//    state.State.Transform.Position.y = y;
+//    state.State.Transform.Position.z = z;
+
+//	// To allow SetYaw() to be called from multiple threads we need a mutex
+//	// because LocklessUpdater is only safe for single producer cases.
+//	RecenterMutex.DoLock();
+//	RecenterTransform.SetState( yawAdjustment );
+//	RecenterMutex.Unlock();
+
+//    // Store the lockless state.
+//    StateForPrediction state;
+//    state.State = State;
+//    state.Temperature = msg.Temperature;
+//	UpdatedStateMutex.DoLock();
+//    UpdatedState.SetState(state);
+//    UpdatedStateMutex.Unlock();
+	Position.SetState( Vector3f( x, y, z ) );
+}
+
 void SensorFusion::handleMessage(const MessageBodyFrame& msg)
 {
     if (msg.Type != Message_BodyFrame || !IsMotionTrackingEnabled())
@@ -204,12 +230,15 @@ void SensorFusion::handleMessage(const MessageBodyFrame& msg)
 
     // Update headset position
     {
-    	EnableGravity = true;
-    	EnableYawCorrection = true;
+    	//EnableGravity = true;
+    	//EnableYawCorrection = true;
 
     	// TBD apply neck model here
     	State.LinearVelocity.x = State.LinearVelocity.y = State.LinearVelocity.z = 0.0f;
-    	State.Transform.Position.x = State.Transform.Position.y = State.Transform.Position.z = 0.0f;
+    	//State.Transform.Position.x = State.Transform.Position.y = State.Transform.Position.z = 0.0f;
+
+    	const Vector3f pos = Position.GetState();
+		State.Transform.Position = pos;
     }
 
     // Compute the angular acceleration

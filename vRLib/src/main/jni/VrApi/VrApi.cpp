@@ -151,6 +151,15 @@ void ovr_RecenterYawInternal()
 	OvrHmdState->RecenterYaw();
 }
 
+void ovr_SetPosition( float x, float y, float z )
+{
+	if ( OvrHmdState == NULL )
+	{
+		return;
+	}
+	OvrHmdState->SetPosition( x, y, z );
+}
+
 // Does latency test processing and returns 'true' if specified rgb color should
 // be used to clear the screen.
 bool ovr_ProcessLatencyTest( unsigned char rgbColorOut[3] )

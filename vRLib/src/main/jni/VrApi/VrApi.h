@@ -441,6 +441,8 @@ ovrSensorState	ovr_GetPredictedSensorState( ovrMobile * ovr, double absTime );
 // images from being abrubtly warped across the screen.
 void			ovr_RecenterYaw( ovrMobile * ovr );
 
+void ovr_SetPosition( float x, float y, float z );
+
 //-----------------------------------------------------------------
 // Warp Swap
 //-----------------------------------------------------------------

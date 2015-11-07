@@ -179,6 +179,9 @@ public:
 	// Recenters the current orientation on yaw axis
 	void        RecenterYaw();
 
+	// set position
+	void        SetPosition( float x, float y, float z );
+
 
     // *** Configuration
 
@@ -317,6 +320,9 @@ private:
 
 	Mutex					RecenterMutex;
 	LocklessUpdater<Posef>	RecenterTransform;	// this is an additional transform that is applied to "recenter" the orientation in yaw.
+
+	//Mutex					SetPositionMutex;
+	LocklessUpdater<Vector3f>	Position;
 };
 
 

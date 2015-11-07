@@ -24,6 +24,15 @@ long Java_com_oculusvr_vrscene_MainActivity_nativeSetAppInterface( JNIEnv *jni, 
 	return (new VrScene())->SetActivity( jni, clazz, activity, fromPackageName, commandString, uriString );
 }
 
+void Java_com_oculusvr_vrscene_MainActivity_nativeSetPosition( JNIEnv *jni, jclass clazz, jfloat x, jfloat y, jfloat z )
+{
+//	if ( OneTimeInitCalled )
+//	{
+//	}
+    //LOG("BluetoothDataManager x[%f] y[%f] z[%f]", x, y, z);
+    ovr_SetPosition(x, y, z);
+}
+
 } // extern "C"
 
 //=============================================================================
@@ -161,6 +170,10 @@ Matrix4f VrScene::DrawEyeView( const int eye, const float fovDegrees )
 
 Matrix4f VrScene::Frame( const VrFrame vrFrame )
 {
+	//ovr_SetPosition(vrFrame.PoseState.Pose.Position.x + 0.01f, 0.0f, 0.0f);
+
+    //LOG("BluetoothDataManager x[%f] y[%f] z[%f]", vrFrame.PoseState.Pose.Position.x, vrFrame.PoseState.Pose.Position.y, vrFrame.PoseState.Pose.Position.z);
+
 	// Get the current vrParms for the buffer resolution.
 	const EyeParms vrParms = app->GetEyeParms();
 

@@ -99,7 +99,7 @@ OvrSceneView::OvrSceneView() :
 	YawOffset( 0.0f ),
 	PitchOffset( 0.0f ),
 	YawVelocity( 0.0f ),
-	AllowPositionTracking( false ),
+	AllowPositionTracking( true ),
 	LastHeadModelOffset( 0.0f ),
 	EyeYaw( 0.0f ),
 	EyePitch( 0.0f ),
@@ -315,8 +315,9 @@ Vector3f OvrSceneView::HeadModelOffset( float EyeRoll, float EyePitch, float Eye
 void OvrSceneView::UpdateViewMatrix(const VrFrame vrFrame )
 {
 	// Experiments with position tracking
-	const bool	useHeadModel = !AllowPositionTracking ||
-			( ( vrFrame.Input.buttonState & ( BUTTON_A | BUTTON_X ) ) == 0 );
+//	const bool	useHeadModel = !AllowPositionTracking ||
+//			( ( vrFrame.Input.buttonState & ( BUTTON_A | BUTTON_X ) ) == 0 );
+	const bool	useHeadModel = false;
 
 	// Delta time in seconds since last frame.
 	const float dt = vrFrame.DeltaSeconds;
@@ -334,6 +335,11 @@ void OvrSceneView::UpdateViewMatrix(const VrFrame vrFrame )
 		GamepadMove.z = vrFrame.Input.sticks[0][1];
 	}
 	GamepadMove.x = vrFrame.Input.sticks[0][0];
+
+	if ( vrFrame.Input.buttonState & BUTTON_TOUCH )
+	{
+		GamepadMove.z = (vrFrame.Input.touch[0]-1200.0f)/200.0f;
+	}
 
 	// Turn based on the look stick
 	// Because this can be predicted ahead by async TimeWarp, we apply
@@ -424,6 +430,8 @@ void OvrSceneView::UpdateViewMatrix(const VrFrame vrFrame )
 		// Use position tracking from the sensor system, which is in absolute
 		// coordinates without the YawOffset
 		ShiftedEyePos += Matrix4f::RotationY( YawOffset ).Transform( vrFrame.PoseState.Pose.Position );
+
+    	//LOG("BluetoothDataManager x[%f] y[%f] z[%f]", vrFrame.PoseState.Pose.Position.x, vrFrame.PoseState.Pose.Position.y, vrFrame.PoseState.Pose.Position.z);
 
 		ShiftedEyePos -= forward * ImuToEyeCenter.z;
 		ShiftedEyePos -= right * ImuToEyeCenter.x;

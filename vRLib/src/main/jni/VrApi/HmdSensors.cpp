@@ -141,6 +141,11 @@ void HMDState::RecenterYaw()
 	SFusion.RecenterYaw();
 }
 
+void HMDState::SetPosition( float x, float y, float z )
+{
+	SFusion.SetPosition( x, y, z );
+}
+
 // Any number of threads can fetch the predicted sensor state.
 OVR::SensorState HMDState::PredictedSensorState( double absTime )
 {
